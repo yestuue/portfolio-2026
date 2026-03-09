@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* New Welcoming & Professional Palette */
+    /* Primary Branding Palette */
     --color-primary: #0ea5e9;       /* Sky 500 */
     --color-primary-light: #e0f2fe; /* Sky 100 */
     --color-primary-dark: #0369a1;  /* Sky 700 */
@@ -18,14 +18,15 @@
     
     --nav-height: 80px;
 
-    /* Mapping for legacy component compatibility */
+    /* Legacy compatibility mappings */
     --color-electric-cyan: #0ea5e9;
     --color-warm-gold: #f59e0b;
   }
 
   * {
-    @apply border-border;
     box-sizing: border-box;
+    /* This replaces the 'border-border' error with a clean Slate-200 */
+    border-color: #e2e8f0; 
   }
 
   html,
@@ -88,7 +89,7 @@
   animation: spin-slow 12s linear infinite;
 }
 
-/* Updated Marquee Logic for perfect loop */
+/* Marquee Logic for seamless loop */
 .animate-marquee {
   display: flex;
   width: max-content;
@@ -113,7 +114,7 @@
   );
 }
 
-/* Fixed Glassmorphism Nav (RGBA Fix) */
+/* Premium Glassmorphism Navigation */
 .glass-nav {
   background: rgba(248, 250, 252, 0.8);
   backdrop-filter: blur(12px);
@@ -121,14 +122,14 @@
   border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 
-/* Container Utility */
+/* Layout Container */
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* Custom Scrollbar - Minimalist */
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
