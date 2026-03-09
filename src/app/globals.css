@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Primary Branding Palette */
+    /* LIGHT MODE PALETTE */
     --color-primary: #0ea5e9;       /* Sky 500 */
     --color-primary-light: #e0f2fe; /* Sky 100 */
     --color-primary-dark: #0369a1;  /* Sky 700 */
@@ -15,18 +15,24 @@
     --color-bg-light: #f8fafc;      /* Slate 50 */
     --color-text-main: #0f172a;     /* Slate 900 */
     --color-text-muted: #64748b;    /* Slate 500 */
+    --border-color: #e2e8f0;        /* Slate 200 */
     
     --nav-height: 80px;
+    --glass-bg: rgba(248, 250, 252, 0.8);
+  }
 
-    /* Legacy compatibility mappings */
-    --color-electric-cyan: #0ea5e9;
-    --color-warm-gold: #f59e0b;
+  .dark {
+    /* DARK MODE PALETTE */
+    --color-bg-light: #020617;      /* Slate 950 */
+    --color-text-main: #f8fafc;     /* Slate 50 */
+    --color-text-muted: #94a3b8;    /* Slate 400 */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(2, 6, 23, 0.8);
   }
 
   * {
     box-sizing: border-box;
-    /* This replaces the 'border-border' error with a clean Slate-200 */
-    border-color: #e2e8f0; 
+    border-color: var(--border-color); 
   }
 
   html,
@@ -37,6 +43,7 @@
     color: var(--color-text-main);
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth fade between themes */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -53,16 +60,11 @@
   font-family: 'JetBrains Mono', monospace; 
 }
 
-/* --- KEYFRAMES --- */
+/* --- ANIMATIONS --- */
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.4; filter: blur(20px); }
-  50% { transform: scale(1.1); opacity: 0.6; filter: blur(30px); }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes spin-slow {
@@ -70,26 +72,13 @@
   to { transform: rotate(360deg); }
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
 }
 
 /* --- UTILITIES --- */
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s infinite ease-in-out;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 12s linear infinite;
-}
-
-/* Marquee Logic for seamless loop */
 .animate-marquee {
   display: flex;
   width: max-content;
@@ -97,36 +86,20 @@
   will-change: transform;
 }
 
-.marquee-mask {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 15%,
-    black 85%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 15%,
-    black 85%,
-    transparent
-  );
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Premium Glassmorphism Navigation */
 .glass-nav {
-  background: rgba(248, 250, 252, 0.8);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
-}
-
-/* Layout Container */
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Minimalist Scrollbar */
@@ -139,6 +112,9 @@
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 10px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155; /* Slate 700 for dark mode */
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);

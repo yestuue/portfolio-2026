@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-// Optimizing fonts for a professional, welcoming feel
 const jakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"], 
   variable: "--font-display",
@@ -11,7 +11,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 const inter = Inter({ 
   subsets: ["latin"], 
-  variable: "--font-body",
+  variable: "--font-body", 
   display: 'swap',
 });
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Blockchain Developer Nigeria", "AI Developer Lagos", 
     "Shopify Developer Nigeria", "Smart Contract Developer Africa"
   ],
-  metadataBase: new URL('https://samuelopeyemi.dev'),
+  metadataBase: new URL('https://samuelopeyemi.com'),
   alternates: {
     canonical: '/',
     languages: {
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Samuel Opeyemi | Engineering & Strategy",
     description: "Building the future of Web3 and AI from Lagos, Nigeria.",
-    url: "https://samuelopeyemi.dev",
+    url: "https://samuelopeyemi.com",
     siteName: "Samuel Opeyemi Portfolio",
     images: [
       {
-        url: "/og-image.png", // Ensure this exists in your /public folder
+        url: "/og-image.png", 
         width: 1200,
         height: 630,
         alt: "Samuel Opeyemi — Full Stack, Blockchain & AI Engineer",
@@ -64,9 +64,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable} scroll-smooth`}>
-      <body className="antialiased bg-slate-50 text-slate-900 selection:bg-sky-100 selection:text-sky-900">
-        {children}
+    <html 
+      lang="en" 
+      className={`${jakarta.variable} ${inter.variable} scroll-smooth`} 
+      suppressHydrationWarning
+    >
+      <body className="antialiased selection:bg-sky-100 selection:text-sky-900 transition-colors duration-300">
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="dark" 
+          enableSystem 
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
