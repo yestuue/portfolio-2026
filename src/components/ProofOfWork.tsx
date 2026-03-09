@@ -1,15 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, CheckCircle2, ShoppingCart, Cpu, Globe } from "lucide-react";
+import { ExternalLink, CheckCircle2, Smartphone, Cpu, Globe, ShoppingCart, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProofOfWork() {
   const [filter, setFilter] = useState("All");
   
-  const filters = ["All", "⛓ Blockchain", "🤖 AI/LLM", "💻 Full Stack", "🛍 Shopify"];
+  const filters = ["All", "📱 Mobile Apps", "⛓ Blockchain", "🤖 AI/LLM", "🛍 Shopify"];
 
   const projects = [
+    {
+      title: "Luvly App",
+      category: "📱 Mobile Apps",
+      desc: "High-performance iOS & Android hair inspiration app with AI trend discovery and personalized galleries.",
+      tech: ["React Native", "Expo", "Firebase"],
+      web3: false,
+      status: "App Store",
+    },
+    {
+      title: "Neroload Mobile",
+      category: "📱 Mobile Apps",
+      desc: "Secure mobile gateway for gift card trading with real-time push notifications and instant wallet payouts.",
+      tech: ["React Native", "Node.js", "PostgreSQL"],
+      web3: false,
+      status: "Production",
+    },
     {
       title: "NoFoldZone (NFZ)",
       category: "🛍 Shopify",
@@ -19,7 +35,7 @@ export default function ProofOfWork() {
       status: "Online",
     },
     {
-      title: "RAG Customer Support AI",
+      title: "RAG Support AI",
       category: "🤖 AI/LLM",
       desc: "Enterprise compliance chatbot built with custom documentation RAG to reduce support tickets by 40%.",
       tech: ["Python", "LangChain", "OpenAI"],
@@ -27,12 +43,12 @@ export default function ProofOfWork() {
       status: "Online",
     },
     {
-      title: "DeFi Yield Aggregator",
+      title: "DeFi Aggregator",
       category: "⛓ Blockchain",
       desc: "Smart contracts for optimizing yield across multiple lending protocols. Audited and deployed on Polygon.",
       tech: ["Solidity", "Hardhat", "Ethers.js"],
       web3: true,
-      status: "Online",
+      status: "Mainnet",
     },
     {
       title: "Icon Wrist Hub",
@@ -50,32 +66,35 @@ export default function ProofOfWork() {
     <section id="projects" className="py-24 bg-slate-50 relative z-20">
       <div className="container mx-auto px-6">
         
-        <div className="text-center md:text-left mb-16 space-y-4">
-          <motion.h3 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="font-mono text-xs tracking-widest text-sky-600 font-bold uppercase"
-          >
-            — Verified Projects
-          </motion.h3>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900">
-            Shipped Products. Proven Results.
-          </h2>
-          <p className="text-xl text-slate-500 font-medium max-w-2xl">
-            From automated lead generation tools to high-conversion Shopify stores, I build to solve problems.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl space-y-4">
+            <motion.h3 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="font-mono text-[10px] tracking-[0.3em] text-sky-600 font-bold uppercase"
+            >
+              — Selected Artifacts
+            </motion.h3>
+            <h2 className="text-5xl md:text-6xl font-display font-bold text-slate-900 leading-[0.9]">
+              Proof of <br/>
+              <span className="text-sky-500">Engineering.</span>
+            </h2>
+            <p className="text-lg text-slate-500 font-medium leading-relaxed pt-2">
+              From high-performance <span className="text-slate-900 font-bold underline decoration-sky-500/30">Mobile Apps</span> to secure blockchain infrastructure.
+            </p>
+          </div>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        {/* Filter Bar */}
+        <div className="flex flex-wrap gap-2 mb-12">
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 border ${
+              className={`px-5 py-2 rounded-xl font-bold text-[11px] uppercase tracking-widest transition-all duration-300 border ${
                 filter === f 
-                  ? "bg-slate-900 text-white border-slate-900 shadow-lg shadow-slate-200" 
-                  : "bg-white text-slate-500 border-slate-200 hover:border-sky-400 hover:text-sky-600"
+                  ? "bg-slate-900 text-white border-slate-900 shadow-xl shadow-slate-200" 
+                  : "bg-white text-slate-400 border-slate-200 hover:border-sky-400 hover:text-sky-600"
               }`}
             >
               {f}
@@ -93,59 +112,51 @@ export default function ProofOfWork() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 key={project.title} 
-                className="group relative bg-white rounded-3xl border border-slate-200 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/10 hover:border-sky-200"
+                className="group relative bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2"
               >
-                {/* Visual Header */}
-                <div className="h-48 bg-slate-900 relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-br from-sky-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="font-mono text-sky-400 text-[10px] p-6 w-full h-full whitespace-pre-wrap opacity-40 group-hover:opacity-70 transition-opacity">
-                    {`> project_init: ${project.title.toLowerCase()}\n> stack_check: ${project.tech.join(', ')}\n> status: optimized\n> rendering_interface...`}
+                {/* Visual Header with Terminal Mockup */}
+                <div className="h-44 bg-slate-900 relative overflow-hidden flex items-center justify-center p-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-transparent"></div>
+                  <div className="font-mono text-sky-400/40 text-[9px] w-full leading-relaxed select-none overflow-hidden">
+                    {`$ npm init -y\n$ installing_dependencies...\n$ build: ${project.title.toLowerCase()}\n$ status: 100%_optimized\n$ architecture: ${project.category.replace(/[^a-zA-Z]/g, '')}`}
                   </div>
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] text-white font-bold border border-white/20">
+                  
+                  {/* Category Pill */}
+                  <div className="absolute bottom-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[9px] text-white font-bold border border-white/20 uppercase tracking-widest">
                     {project.category}
                   </div>
                 </div>
 
-                <div className="p-8 space-y-6">
-                  <div>
-                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">{project.title}</h4>
-                    <p className="text-slate-500 text-sm mt-3 leading-relaxed line-clamp-2">{project.desc}</p>
+                <div className="p-8 flex flex-col min-h-[300px]">
+                  <div className="flex-1 space-y-4">
+                    <h4 className="text-2xl font-display font-bold text-slate-900 group-hover:text-sky-600 transition-colors">{project.title}</h4>
+                    <p className="text-slate-500 text-sm font-medium leading-relaxed line-clamp-3">{project.desc}</p>
+                    
+                    {/* Tech List */}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {project.tech.map(t => (
+                        <span key={t} className="px-2.5 py-1 bg-slate-50 border border-slate-100 text-[10px] font-bold text-slate-400 rounded-lg uppercase tracking-tighter">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Tech Pills */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map(t => (
-                      <span key={t} className="px-3 py-1 bg-slate-100 text-[10px] font-bold text-slate-600 rounded-md uppercase tracking-wider">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action Row */}
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-100">
+                  {/* Footer Action */}
+                  <div className="flex items-center justify-between pt-8 mt-auto border-t border-slate-50">
                     <div className="flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-tighter">{project.status}</span>
+                      <div className="flex items-center gap-1.5 text-[10px] text-emerald-600 font-bold uppercase tracking-widest">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        {project.status}
+                      </div>
                     </div>
                     
-                    {project.web3 ? (
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1 text-[10px] text-emerald-600 font-bold uppercase">
-                          <CheckCircle2 className="w-3 h-3" /> Audited
-                        </div>
-                        <button className="flex items-center gap-1 text-sm font-bold text-sky-500 hover:text-sky-700 transition-colors">
-                          <ExternalLink className="w-4 h-4" /> Verify
-                        </button>
-                      </div>
-                    ) : (
-                      <button className="flex items-center gap-2 text-sm font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-sky-600 transition-all">
-                        View Project ↗
-                      </button>
-                    )}
+                    <button className="flex items-center gap-2 text-xs font-bold text-sky-500 hover:text-slate-900 transition-all uppercase tracking-widest group/btn">
+                      Details <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </div>
                 </div>
               </motion.div>

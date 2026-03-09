@@ -1,9 +1,8 @@
 "use client";
 
-import { MessageSquare, Send, Calendar, Bot } from "lucide-react";
+import { MessageSquare, Send, Calendar, Bot, User, Terminal, Sparkles } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function AITwin() {
   const [messages, setMessages] = useState([
@@ -16,11 +15,11 @@ export default function AITwin() {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
   const chips = [
-    "What's your React experience?",
-    "Can you build a DeFi app?",
+    "Tech Stack?",
+    "Blockchain Experience?",
     "What's your rate?",
-    "Are you available this month?",
-    "How do payments work?"
+    "Availability?",
+    "Past Projects?"
   ];
 
   const handleSend = (text: string) => {
@@ -30,7 +29,7 @@ export default function AITwin() {
     
     // Simulate AI typing and response
     setTimeout(() => {
-      setMessages(prev => [...prev, { sender: "bot", text: "I'm a simulated frontend right now, but Samuel would love to discuss this with you on a call!" }]);
+      setMessages(prev => [...prev, { sender: "bot", text: "I'm currently a simulated interface, but I've been trained on Samuel's project history. He'd love to give you a deep dive on a call!" }]);
     }, 1000);
   };
 
@@ -39,77 +38,83 @@ export default function AITwin() {
   }, [messages]);
 
   return (
-    <section id="ai-twin" className="py-24 bg-[#FAFAFA] relative">
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="ai-twin" className="py-24 bg-white relative overflow-hidden">
+      {/* Subtle Background Accent */}
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-sky-100/50 rounded-full blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         {/* Left: Content */}
         <div className="space-y-8">
-          <div className="space-y-4">
-            <h3 className="font-mono text-sm tracking-widest text-[#00D4FF] font-bold uppercase">— AI Twin</h3>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight">
-              Samuel is coding.<br/>His AI Twin is ready.
+          <div className="space-y-6">
+            <h3 className="font-mono text-[10px] tracking-[0.3em] text-sky-600 font-bold uppercase">— Neural Digital Twin</h3>
+            <h2 className="text-5xl md:text-6xl font-display font-bold text-slate-900 leading-[0.9]">
+              Samuel is coding.<br/>
+              <span className="text-sky-500">His AI is ready.</span>
             </h2>
-            <p className="text-xl text-gray-600 font-body">
-              Ask anything about his skills, experience, rates, or availability. Get immediate answers while Samuel ships blocks.
+            <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-md">
+              Ask anything about his technical stack, rates, or availability. Get immediate architectural insights while Samuel ships blocks.
             </p>
           </div>
 
-          <div className="pt-8 border-t border-gray-200">
-            <div className="flex items-center gap-4 text-gray-500 font-medium font-body mb-6">
+          <div className="pt-8 border-t border-slate-100">
+            <div className="flex items-center gap-4 text-slate-400 font-bold text-xs uppercase tracking-widest mb-6">
               Prefer the real Samuel?
-              <Link href="#contact" className="flex items-center gap-2 text-[#00D4FF] hover:text-[#050508] transition-colors font-bold group">
-                <Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" /> 
-                📅 Book a Call →
+              <Link href="#contact" className="flex items-center gap-2 text-sky-500 hover:text-slate-900 transition-all group">
+                <Calendar className="w-4 h-4 group-hover:rotate-12 transition-transform" /> 
+                Book a Call →
               </Link>
             </div>
             
-            <div className="flex items-center gap-2 text-xs font-mono text-gray-400">
-              <Bot className="w-4 h-4" /> Powered by Claude API & RAG
+            <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-slate-300 uppercase tracking-widest">
+              <Terminal className="w-3 h-3" /> Instance: v2.1-Stable (RAG Enabled)
             </div>
           </div>
         </div>
 
-        {/* Right: Chat Interface */}
-        <div className="bg-[#050508] rounded-2xl shadow-2xl border border-gray-800 overflow-hidden flex flex-col h-[500px]">
+        {/* Right: Chat Interface (The "Terminal" look) */}
+        <div className="bg-slate-900 rounded-[2.5rem] shadow-2xl shadow-sky-900/10 border border-slate-800 overflow-hidden flex flex-col h-[550px]">
+          
           {/* Mac window header */}
-          <div className="h-12 bg-[#0F0F1A] border-b border-gray-800 flex items-center px-4 justify-between">
+          <div className="h-14 bg-slate-900/50 backdrop-blur-md border-b border-slate-800 flex items-center px-6 justify-between">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
             </div>
-            <div className="font-mono text-xs text-gray-400 font-bold flex items-center gap-2">
-              SAMUEL_AI — RUNNING 
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <div className="font-mono text-[10px] text-slate-500 font-bold flex items-center gap-3 tracking-widest uppercase">
+              <Sparkles className="w-3 h-3 text-sky-500" />
+              Samuel_AI Process
+              <span className="relative flex h-1.5 w-1.5 ml-1">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
               </span>
             </div>
-            <div className="w-12"></div>
+            <div className="w-10"></div>
           </div>
 
           {/* Chat area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-[#050508] to-[#0A0A0F]">
+          <div className="flex-1 overflow-y-auto p-8 space-y-6 scrollbar-hide">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className="flex gap-3 max-w-[85%]">
-                  {msg.sender === 'bot' && (
-                    <div className="w-8 h-8 rounded-full bg-[#00D4FF]/20 flex items-center justify-center shrink-0 border border-[#00D4FF]/30">
-                      <Bot className="w-4 h-4 text-[#00D4FF]" />
-                    </div>
-                  )}
-                  <div className={`p-4 rounded-2xl text-sm font-body leading-relaxed ${
+                <div className={`flex gap-4 max-w-[85%] ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                  
+                  {/* Avatar Icons instead of Images to prevent broken links */}
+                  <div className={`w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 border ${
+                    msg.sender === 'bot' 
+                      ? 'bg-sky-500/10 border-sky-500/30 text-sky-500' 
+                      : 'bg-slate-800 border-slate-700 text-slate-400'
+                  }`}>
+                    {msg.sender === 'bot' ? <Bot className="w-4 h-4" /> : <User className="w-4 h-4" />}
+                  </div>
+
+                  <div className={`p-4 rounded-[1.5rem] text-sm font-medium leading-relaxed ${
                     msg.sender === 'user' 
-                      ? 'bg-[#00D4FF] text-[#050508] rounded-tr-sm font-medium' 
-                      : 'bg-[#1A1A24] text-gray-200 border border-gray-800 rounded-tl-sm'
+                      ? 'bg-sky-500 text-white rounded-tr-none shadow-lg shadow-sky-500/20' 
+                      : 'bg-slate-800/50 text-slate-200 border border-slate-700/50 rounded-tl-none'
                   }`}>
                     {msg.text}
                   </div>
-                  {msg.sender === 'user' && (
-                    <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 overflow-hidden">
-                      <Image src="/guest.png" alt="User" width={32} height={32} />
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
@@ -117,14 +122,14 @@ export default function AITwin() {
           </div>
 
           {/* Input area */}
-          <div className="p-4 border-t border-gray-800 bg-[#0F0F1A]">
+          <div className="p-6 border-t border-slate-800 bg-slate-900">
             {/* Suggested Chips */}
-            <div className="flex overflow-x-auto gap-2 mb-4 pb-2 no-scrollbar">
+            <div className="flex overflow-x-auto gap-2 mb-5 pb-1 no-scrollbar">
               {chips.map(chip => (
                 <button 
                   key={chip}
                   onClick={() => handleSend(chip)}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-full border border-gray-700 font-mono text-xs text-gray-400 hover:text-white hover:border-[#00D4FF] transition-colors"
+                  className="whitespace-nowrap px-4 py-2 rounded-xl border border-slate-800 font-mono text-[10px] font-bold text-slate-500 uppercase tracking-widest hover:text-white hover:border-sky-500 transition-all bg-slate-800/30"
                 >
                   {chip}
                 </button>
@@ -137,12 +142,12 @@ export default function AITwin() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleSend(input)}
-                placeholder="Message Samuel's AI Twin..."
-                className="w-full bg-[#1A1A24] border border-gray-700 text-white rounded-xl py-3 pl-4 pr-12 focus:outline-none focus:border-[#00D4FF] text-sm font-body placeholder-gray-500"
+                placeholder="Ask about rates, availability, or stack..."
+                className="w-full bg-slate-800/50 border border-slate-700 text-white rounded-2xl py-4 pl-5 pr-14 focus:outline-none focus:border-sky-500 transition-all text-sm font-medium placeholder-slate-600"
               />
               <button 
                 onClick={() => handleSend(input)}
-                className="absolute right-2 p-2 text-gray-400 hover:text-[#00D4FF] transition-colors"
+                className="absolute right-3 p-2.5 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition-all shadow-lg shadow-sky-500/20 active:scale-90"
               >
                 <Send className="w-4 h-4" />
               </button>

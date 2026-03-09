@@ -9,15 +9,15 @@
   --color-primary: #0ea5e9;       /* Sky 500 */
   --color-primary-light: #e0f2fe; /* Sky 100 */
   --color-primary-dark: #0369a1;  /* Sky 700 */
-  --color-accent: #f59e0b;        /* Amber 500 (Softer than the old gold) */
+  --color-accent: #f59e0b;        /* Amber 500 */
   
-  --color-bg-light: #f8fafc;      /* Slate 50 (Warm off-white) */
+  --color-bg-light: #f8fafc;      /* Slate 50 */
   --color-text-main: #0f172a;     /* Slate 900 */
   --color-text-muted: #64748b;    /* Slate 500 */
   
   --nav-height: 80px;
 
-  /* Re-mapping for compatibility with your existing components */
+  /* Re-mapping for compatibility */
   --color-electric-cyan: var(--color-primary);
   --color-warm-gold: var(--color-accent);
 }
@@ -48,17 +48,16 @@ body {
   font-family: 'JetBrains Mono', monospace; 
 }
 
-/* Animations */
+/* --- KEYFRAMES --- */
+
 @keyframes float {
-  0% { transform: translateY(0px); }
+  0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
 }
 
 @keyframes pulse-glow {
-  0% { transform: scale(1); opacity: 0.4; filter: blur(20px); }
+  0%, 100% { transform: scale(1); opacity: 0.4; filter: blur(20px); }
   50% { transform: scale(1.1); opacity: 0.6; filter: blur(30px); }
-  100% { transform: scale(1); opacity: 0.4; filter: blur(20px); }
 }
 
 @keyframes spin-slow {
@@ -66,12 +65,14 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* Fixed Marquee: Moves content left exactly 50% */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Animation Utilities */
+/* --- UTILITIES --- */
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -84,8 +85,22 @@ body {
   animation: spin-slow 12s linear infinite;
 }
 
+/* Crucial for the LiveStatus marquee to work */
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+/* Optional: Fades the edges of the marquee for a cleaner look */
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
 }
 
 /* Glassmorphism Navigation */
@@ -103,7 +118,7 @@ body {
   padding: 0 1.5rem;
 }
 
-/* Custom Scrollbar for a cleaner look */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

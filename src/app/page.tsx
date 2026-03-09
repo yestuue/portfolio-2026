@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LiveStatus from "@/components/LiveStatus";
@@ -12,18 +13,39 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  // 1. Fetch headers from Middleware
+  const headerList = headers();
+  const countryCode = headerList.get('x-user-region') || 'NG';
+
+  // 2. Map Country Codes to Display Names
+  const regionNames: Record<string, string> = {
+    'NG': 'Nigeria 🇳🇬',
+    'US': 'United States 🇺🇸',
+    'GB': 'United Kingdom 🇬🇧',
+    'CA': 'Canada 🇨🇦',
+    'DE': 'Germany 🇩🇪',
+    'FR': 'France 🇫🇷',
+    'AE': 'United Arab Emirates 🇦🇪',
+  };
+
+  const regionDisplay = regionNames[countryCode] || `Global Region (${countryCode})`;
+
   return (
-    // Changed to a softer off-white/slate-50 background for a premium feel
     <main className="min-h-screen bg-slate-50 text-slate-900 selection:bg-sky-100">
       
-      {/* Fixed Header Section to prevent overlapping */}
-      <header className="fixed top-0 left-0 w-full z-50 border-b border-slate-200/60 bg-white/80 backdrop-blur-md">
-        <LiveStatus />
+      {/* Header Section */}
+      <header className="relative z-50">
+        {/* LiveStatus is fixed to the top inside its own component */}
+        <LiveStatus region={regionDisplay} />
+        
+        {/* Navbar handles its own fixed positioning and scroll logic */}
         <Navbar />
       </header>
 
-      {/* Padding top ensures Hero content starts below the fixed header */}
-      <div className="pt-32 md:pt-40">
+      {/* Padding top (pt) ensures Hero starts below the combined 
+          height of LiveStatus (~44px) and Navbar (~80px).
+      */}
+      <div className="pt-[124px]">
         <Hero />
       </div>
 

@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Activity, GitCommit, Link as LinkIcon, MapPin } from "lucide-react";
+import { GitCommit, Link as LinkIcon, MapPin, Globe, Activity } from "lucide-react";
 
-export default function LiveStatus() {
+// Added the region prop here
+export default function LiveStatus({ region }: { region: string }) {
   const [time, setTime] = useState<string>("");
-  const [pulse, setPulse] = useState(false);
 
   useEffect(() => {
-    // Initial Setting
     const updateTime = () => {
       const now = new Date();
       setTime(
@@ -19,51 +18,73 @@ export default function LiveStatus() {
           hour12: true,
         })
       );
-      setPulse(true);
-      setTimeout(() => setPulse(false), 1000);
     };
 
     updateTime();
-    // Refresh every 60 seconds
     const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
   }, []);
 
+  const StatusItem = ({ icon: Icon, text, color }: { icon: any, text: string, color: string }) => (
+    <div className="flex items-center gap-3 px-12 whitespace-nowrap group">
+      <Icon className={`w-3.5 h-3.5 ${color} transition-transform group-hover:scale-125`} />
+      <span className="text-slate-400 font-mono text-[10px] tracking-[0.15em] font-bold uppercase">
+        {text}
+      </span>
+    </div>
+  );
+
   return (
-    <div className="w-full bg-[#050508] border-b border-gray-800 py-3 relative z-20">
-      <div className="container mx-auto">
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono font-medium transition-opacity duration-1000 ${pulse ? 'opacity-70' : 'opacity-100'}`}>
-          
-          {/* Item 1 */}
-          <div className="flex items-center space-x-2 text-gray-400">
-            <div className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+    <div className="w-full bg-slate-950 border-b border-slate-800/50 py-3 relative z-30 overflow-hidden">
+      {/* Edge Fading Mask */}
+      <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 opacity-100 md:opacity-100" />
+      
+      <div className="flex animate-marquee hover:[animation-play-state:paused] cursor-default">
+        {[...Array(2)].map((_, i) => (
+          <div key={i} className="flex items-center min-w-full">
+            {/* Pulsing Status */}
+            <div className="flex items-center gap-2.5 px-12 whitespace-nowrap">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+              </span>
+              <span className="text-sky-400 font-mono text-[10px] font-black uppercase tracking-[0.2em]">
+                System Active
+              </span>
             </div>
-            <span>Live Apps: 3 Deployed | All Systems Operational</span>
-          </div>
 
-          {/* Item 2 */}
-          <div className="flex items-center space-x-2 text-gray-400">
-            <GitCommit className="w-4 h-4 text-[#00D4FF]" />
-            <span className="truncate">Last Commit: 2h ago — refactor(auth): simplify</span>
-          </div>
+            {/* Dynamic IP Detection Item */}
+            <StatusItem 
+              icon={Globe} 
+              color="text-emerald-400" 
+              text={`Visitor Region: ${region}`} 
+            />
 
-          {/* Item 3 */}
-          <div className="flex items-center space-x-2 text-gray-400">
-            <LinkIcon className="w-4 h-4 text-[#FFB347]" />
-            <span className="truncate">Latest Contract: 0x8f...A1b2 on Mainnet</span>
-          </div>
+            <StatusItem 
+              icon={GitCommit} 
+              color="text-sky-500" 
+              text="Latest Commit: refactor(ui) to production" 
+            />
+            
+            <StatusItem 
+              icon={Activity} 
+              color="text-emerald-500" 
+              text="Uptime: 99.9%" 
+            />
 
-          {/* Item 4 */}
-          <div className="flex items-center space-x-2 text-gray-400 lg:justify-end">
-            <MapPin className="w-4 h-4 text-[#00D4FF]" />
-            <span>
-              Samuel Opeyemi · Lagos 🇳🇬 · <span className="text-white">{time || "Syncing..."} WAT</span>
-            </span>
+            <StatusItem 
+              icon={MapPin} 
+              color="text-sky-500" 
+              text={`Lagos, NG · ${time || "Syncing..."} WAT`} 
+            />
+            
+            <StatusItem 
+              icon={LinkIcon} 
+              color="text-amber-400" 
+              text="Nodes: Mainnet v2.4.0" 
+            />
           </div>
-
-        </div>
+        ))}
       </div>
     </div>
   );
