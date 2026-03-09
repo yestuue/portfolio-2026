@@ -12,12 +12,13 @@ import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-export default function Home() {
-  // 1. Fetch headers from Middleware
-  const headerList = headers();
+// 1. Change to async function
+export default async function Home() {
+  // 2. Await the headers (Required in Next.js 15)
+  const headerList = await headers();
   const countryCode = headerList.get('x-user-region') || 'NG';
 
-  // 2. Map Country Codes to Display Names
+  // 3. Map Country Codes
   const regionNames: Record<string, string> = {
     'NG': 'Nigeria 🇳🇬',
     'US': 'United States 🇺🇸',
@@ -33,18 +34,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 selection:bg-sky-100">
       
-      {/* Header Section */}
       <header className="relative z-50">
-        {/* LiveStatus is fixed to the top inside its own component */}
         <LiveStatus region={regionDisplay} />
-        
-        {/* Navbar handles its own fixed positioning and scroll logic */}
         <Navbar />
       </header>
 
-      {/* Padding top (pt) ensures Hero starts below the combined 
-          height of LiveStatus (~44px) and Navbar (~80px).
-      */}
       <div className="pt-[124px]">
         <Hero />
       </div>

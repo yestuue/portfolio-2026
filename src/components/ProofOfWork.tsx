@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, CheckCircle2, Smartphone, Cpu, Globe, ShoppingCart, Zap } from "lucide-react";
+// Added ArrowRight to the imports below
+import { ExternalLink, CheckCircle2, Smartphone, Cpu, Globe, ShoppingCart, Zap, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProofOfWork() {

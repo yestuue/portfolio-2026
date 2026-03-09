@@ -4,37 +4,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* New Welcoming & Professional Palette */
-  --color-primary: #0ea5e9;       /* Sky 500 */
-  --color-primary-light: #e0f2fe; /* Sky 100 */
-  --color-primary-dark: #0369a1;  /* Sky 700 */
-  --color-accent: #f59e0b;        /* Amber 500 */
-  
-  --color-bg-light: #f8fafc;      /* Slate 50 */
-  --color-text-main: #0f172a;     /* Slate 900 */
-  --color-text-muted: #64748b;    /* Slate 500 */
-  
-  --nav-height: 80px;
+@layer base {
+  :root {
+    /* New Welcoming & Professional Palette */
+    --color-primary: #0ea5e9;       /* Sky 500 */
+    --color-primary-light: #e0f2fe; /* Sky 100 */
+    --color-primary-dark: #0369a1;  /* Sky 700 */
+    --color-accent: #f59e0b;        /* Amber 500 */
+    
+    --color-bg-light: #f8fafc;      /* Slate 50 */
+    --color-text-main: #0f172a;     /* Slate 900 */
+    --color-text-muted: #64748b;    /* Slate 500 */
+    
+    --nav-height: 80px;
 
-  /* Re-mapping for compatibility */
-  --color-electric-cyan: var(--color-primary);
-  --color-warm-gold: var(--color-accent);
-}
+    /* Mapping for legacy component compatibility */
+    --color-electric-cyan: #0ea5e9;
+    --color-warm-gold: #f59e0b;
+  }
 
-/* Base resets & styles */
-* {
-  box-sizing: border-box;
-}
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  background-color: var(--color-bg-light);
-  color: var(--color-text-main);
-  scroll-behavior: smooth;
-  font-family: 'Inter', sans-serif;
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-main);
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 /* Typography Classes */
@@ -65,7 +69,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Fixed Marquee: Moves content left exactly 50% */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -85,42 +88,49 @@ body {
   animation: spin-slow 12s linear infinite;
 }
 
-/* Crucial for the LiveStatus marquee to work */
+/* Updated Marquee Logic for perfect loop */
 .animate-marquee {
-  animation: marquee 40s linear infinite;
   display: flex;
   width: max-content;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
 }
 
-/* Optional: Fades the edges of the marquee for a cleaner look */
 .marquee-mask {
   mask-image: linear-gradient(
     to right,
     transparent,
-    black 10%,
-    black 90%,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
     transparent
   );
 }
 
-/* Glassmorphism Navigation */
+/* Fixed Glassmorphism Nav (RGBA Fix) */
 .glass-nav {
-  background: rgba(248, 250, 260, 0.8);
+  background: rgba(248, 250, 252, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 
-/* Container */
+/* Container Utility */
 .container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Minimalist */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-bg-light);
