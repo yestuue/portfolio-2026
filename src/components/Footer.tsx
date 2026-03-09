@@ -1,95 +1,134 @@
 "use client";
 
-import { ArrowUp, Github, Linkedin, Twitter, MessageCircle, Instagram } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { 
+  ArrowUpRight, 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Instagram, 
+  Youtube, 
+  ArrowUp, 
+  Zap,
+  Phone
+} from "lucide-react";
 
 export default function Footer() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      setTime(
-        new Date().toLocaleTimeString("en-NG", {
-          timeZone: "Africa/Lagos",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        })
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#050508] border-t border-gray-800 text-gray-400 py-16">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 border-b border-gray-800 pb-12 mb-12">
-          
-          <div className="max-w-sm text-center md:text-left space-y-4">
-            <Link href="/" className="inline-block font-display font-bold text-2xl text-white tracking-tight mb-2">
-              Samuel.
-            </Link>
-            <p className="font-body text-sm text-gray-500">
-              Samuel Opeyemi — Full Stack Dev · Blockchain · AI
+    <footer className="relative bg-slate-950 text-white pt-24 pb-12 overflow-hidden">
+      {/* The Deep Blue Glow Effect */}
+      <div className="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-blue-600/20 via-transparent to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* Top Bar: Mission & Social Icons */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-20 bg-white/5 backdrop-blur-md rounded-full px-8 py-4 border border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+              <div className="w-4 h-4 bg-slate-950 rounded-sm rotate-45" />
+            </div>
+            <p className="text-xs font-medium text-slate-300 tracking-tight">
+              Your next idea, beautifully designed and flawlessly built.
             </p>
-            <div className="flex bg-[#0F0F1A] border border-gray-800 rounded-lg p-3 items-center justify-center md:justify-start gap-3 w-fit mx-auto md:mx-0">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span className="font-mono text-xs font-bold text-gray-300">
-                Lagos, NG: <span className="text-[#00D4FF]">{time || "Syncing..."}</span>
-              </span>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            {[
+              { icon: Youtube, link: "#" },
+              { icon: Phone, link: "#" }, // Representing WhatsApp
+              { icon: Instagram, link: "#" },
+              { icon: Github, link: "https://github.com/yestuue" },
+              { icon: Twitter, link: "https://x.com/mrsamuelopeyemi" },
+            ].map((social, i) => (
+              <Link 
+                key={i} 
+                href={social.link} 
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-white hover:text-slate-950 transition-all duration-300"
+              >
+                <social.icon className="w-4 h-4" />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Middle Section: CTA & Links */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
+          
+          {/* Main CTA */}
+          <div className="lg:col-span-7 space-y-8">
+            <h2 className="text-6xl md:text-8xl font-display font-bold leading-[0.9] tracking-tighter uppercase">
+              Let's make it <br />
+              <span className="text-white">happen now</span>
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <Link href="#contact" className="flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-sky-500/20">
+                <Zap className="w-4 h-4 fill-current" /> Start Now
+              </Link>
+              <Link href="https://calendly.com" className="flex items-center gap-2 bg-transparent border border-white/20 hover:border-white text-white px-8 py-4 rounded-full font-bold transition-all">
+                Book a call
+              </Link>
             </div>
           </div>
 
-          {/* Links */}
-          <div className="grid grid-cols-2 gap-12 md:gap-24 text-center md:text-left">
-            <div className="space-y-4">
-              <h5 className="font-mono text-xs font-bold text-gray-300 uppercase tracking-widest">Sitemap</h5>
-              <div className="flex flex-col gap-3 text-sm font-body">
-                {['Home', 'Services', 'About', 'Projects', 'Trust Center'].map(link => (
-                  <Link key={link} href={`#${link.toLowerCase().replace(' ', '-')}`} className="hover:text-[#00D4FF] transition-colors">
-                    {link}
-                  </Link>
+          {/* Navigation Grid */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Navigate</h4>
+              <ul className="space-y-4">
+                {['Home', 'Services', 'Portfolio', 'About', 'Testimonials'].map((item) => (
+                  <li key={item}>
+                    <Link href={`#${item.toLowerCase()}`} className="group flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-white transition-colors">
+                      <span className="text-sky-500">★</span> {item}
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-            <div className="space-y-4">
-              <h5 className="font-mono text-xs font-bold text-gray-300 uppercase tracking-widest">Connect</h5>
-              <div className="flex flex-col gap-3 text-sm font-body">
-                <Link href="https://x.com/mrsamuelopeyemi" className="hover:text-[#00D4FF] transition-colors">X / Twitter</Link>
-                <Link href="https://github.com/yestuue" className="hover:text-[#00D4FF] transition-colors">GitHub</Link>
-                <Link href="https://www.linkedin.com/in/samuel-opeyemii" className="hover:text-[#00D4FF] transition-colors">LinkedIn</Link>
-                <Link href="https://www.instagram.com/shopifybysam" className="hover:text-[#00D4FF] transition-colors">Instagram</Link>
-                <Link href="https://www.tiktok.com/@ekfaadsk" className="hover:text-[#00D4FF] transition-colors">TikTok</Link>
-              </div>
+            <div className="space-y-6">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Resources</h4>
+              <ul className="space-y-4">
+                {['Download CV', 'Website Templates', 'Monthly Newsletter', 'OpicWeb', 'Synq Studio'].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-white transition-colors">
+                      <span className="text-sky-500">★</span> {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start gap-2">
-             <div className="flex items-center gap-2 text-xs font-mono text-green-500 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
-               <span className="text-[10px]">🔒</span> All projects protected by milestone-based escrow
-             </div>
-             <p className="text-xs font-mono text-gray-600 mt-2">
-               © {new Date().getFullYear()} Samuel Opeyemi. Built with Next.js, passion, and Lagos energy ⚡
-             </p>
+        {/* Bottom Bar: Copyright & Time */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-end gap-8">
+          <div className="space-y-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">All rights reserved.</p>
+            <h3 className="text-4xl md:text-6xl font-display font-bold opacity-80">
+              © {currentYear} SAMUEL OPEYEMI
+            </h3>
           </div>
-          <button 
-            onClick={scrollToTop}
-            className="w-12 h-12 rounded-full bg-[#1A1A24] border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#00D4FF] transition-colors group"
-          >
-            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-          </button>
+
+          <div className="flex items-center gap-8">
+            <div className="text-right hidden md:block">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-2">Local Time</p>
+              <p className="text-sm font-bold text-white flex items-center gap-2">
+                <span className="text-sky-500">★</span> {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, timeZoneName: 'short' })}
+              </p>
+            </div>
+            
+            <button 
+              onClick={scrollToTop}
+              className="w-16 h-16 bg-sky-500 hover:bg-sky-400 text-white rounded-full flex items-center justify-center transition-all group shadow-2xl shadow-sky-500/20"
+            >
+              <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
