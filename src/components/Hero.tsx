@@ -1,10 +1,20 @@
 "use client";
 
-import { ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
+import { 
+  ArrowRight, 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Apple, 
+  Instagram, 
+  Youtube, 
+  Framer,
+  Chrome
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const taglines = [
@@ -65,12 +75,11 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Social Proof Quote */}
           <div className="pl-6 border-l-4 border-amber-400 py-3 italic text-slate-600 font-medium bg-amber-50/30 pr-6 rounded-r-2xl border-dashed">
             ❝ "Samuel's engineering depth and marketing insight transformed our product launch." ❞
           </div>
 
-          {/* Verification Bar: Updated with bolder brand labels */}
+          {/* Verification Bar: High-Contrast Brand Labels */}
           <div className="flex items-center gap-6 pt-2">
             <div className="flex -space-x-3">
               {['Fiverr', 'Upwork', 'Meta'].map((brand, i) => (
@@ -107,7 +116,6 @@ export default function Hero() {
 
         {/* RIGHT COLUMN: VISUAL IDENTITY */}
         <div className="relative flex justify-center lg:justify-end min-h-[550px]">
-          
           <div className="absolute -top-10 right-0 w-32 h-32 md:w-44 md:h-44 animate-spin-slow z-30">
             <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-20">
               <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
@@ -117,11 +125,7 @@ export default function Hero() {
             </svg>
           </div>
 
-          {/* Social Links Bar */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 z-40 hidden xl:flex">
-            <div className="transform -rotate-90 origin-bottom font-mono text-[10px] font-bold text-slate-300 tracking-[0.3em] uppercase mb-16">
-              — Connectivity
-            </div>
             {[
               { icon: Github, link: "https://github.com/yestuue" },
               { icon: Linkedin, link: "https://www.linkedin.com/in/samuel-opeyemii" },
@@ -133,10 +137,8 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* Main Photo Container */}
           <div className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-sky-400/10 blur-[100px] animate-pulse"></div>
-            
             <div className="absolute inset-8 rounded-[3rem] bg-white shadow-2xl overflow-hidden border-[12px] border-slate-100/50">
                 <Image 
                   src="/samuel-photo.png" 
@@ -148,7 +150,6 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
             </div>
 
-            {/* Floating Tags */}
             <motion.div 
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
@@ -168,11 +169,24 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Marquee Ticker: Updated to pure white and font-black */}
-      <div className="w-full h-14 bg-slate-950 overflow-hidden flex items-center border-t border-white/5">
-        <div className="flex whitespace-nowrap font-mono text-[11px] font-black text-white uppercase tracking-[0.5em] animate-marquee">
-          {"Engineering Performance + Delivering Value + Shipping Code + Architecture + ".repeat(15)}
-        </div>
+      {/* NEW ELITE LOGO CAROUSEL */}
+      <div className="w-full h-24 bg-slate-950 flex items-center border-t border-white/5 overflow-hidden relative">
+         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10 pointer-events-none opacity-80" />
+         <div className="flex animate-marquee whitespace-nowrap items-center gap-16 px-8 will-change-transform">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-16 md:gap-24">
+                <Apple className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Github className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-2xl opacity-40 italic tracking-tighter">PUMA</span>
+                <Chrome className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Instagram className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-2xl opacity-40 lowercase tracking-tighter">hulu</span>
+                <Youtube className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Framer className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-2xl opacity-40 italic tracking-tighter underline">adidas</span>
+              </div>
+            ))}
+         </div>
       </div>
     </section>
   );
