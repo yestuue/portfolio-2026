@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-// Added ArrowRight to the imports below
+import Image from "next/image"; // Use Next.js Image for optimization
 import { ExternalLink, CheckCircle2, Smartphone, Cpu, Globe, ShoppingCart, Zap, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,49 +14,49 @@ export default function ProofOfWork() {
     {
       title: "Luvly App",
       category: "📱 Mobile Apps",
+      image: "/projects/luvly.png", // Path to your file in public/projects/
       desc: "High-performance iOS & Android hair inspiration app with AI trend discovery and personalized galleries.",
       tech: ["React Native", "Expo", "Firebase"],
-      web3: false,
       status: "App Store",
     },
     {
       title: "Neroload Mobile",
       category: "📱 Mobile Apps",
+      image: "/projects/neroload.png",
       desc: "Secure mobile gateway for gift card trading with real-time push notifications and instant wallet payouts.",
       tech: ["React Native", "Node.js", "PostgreSQL"],
-      web3: false,
       status: "Production",
     },
     {
       title: "NoFoldZone (NFZ)",
       category: "🛍 Shopify",
+      image: "/projects/nfz.png",
       desc: "Streetwear brand store with a custom WhatsApp checkout system and 'vibe-coded' UI architecture.",
       tech: ["Shopify", "Liquid", "JavaScript"],
-      web3: false,
       status: "Online",
     },
     {
       title: "RAG Support AI",
       category: "🤖 AI/LLM",
+      image: "/projects/rag-ai.png",
       desc: "Enterprise compliance chatbot built with custom documentation RAG to reduce support tickets by 40%.",
       tech: ["Python", "LangChain", "OpenAI"],
-      web3: false,
       status: "Online",
     },
     {
       title: "DeFi Aggregator",
       category: "⛓ Blockchain",
+      image: "/projects/defi.png",
       desc: "Smart contracts for optimizing yield across multiple lending protocols. Audited and deployed on Polygon.",
       tech: ["Solidity", "Hardhat", "Ethers.js"],
-      web3: true,
       status: "Mainnet",
     },
     {
       title: "Icon Wrist Hub",
       category: "🛍 Shopify",
+      image: "/projects/icon-wrist.png",
       desc: "High-end watch e-commerce store focused on collection storytelling and premium brand identity.",
       tech: ["Shopify", "Liquid", "Marketing"],
-      web3: false,
       status: "Online",
     },
   ];
@@ -106,7 +106,7 @@ export default function ProofOfWork() {
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
+            {filtered.map((project) => (
               <motion.div 
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -115,20 +115,32 @@ export default function ProofOfWork() {
                 key={project.title} 
                 className="group relative bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2"
               >
-                {/* Visual Header with Terminal Mockup */}
-                <div className="h-44 bg-slate-900 relative overflow-hidden flex items-center justify-center p-6">
-                  <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-transparent"></div>
-                  <div className="font-mono text-sky-400/40 text-[9px] w-full leading-relaxed select-none overflow-hidden">
-                    {`$ npm init -y\n$ installing_dependencies...\n$ build: ${project.title.toLowerCase()}\n$ status: 100%_optimized\n$ architecture: ${project.category.replace(/[^a-zA-Z]/g, '')}`}
-                  </div>
+                {/* Visual Header with Real Image & Terminal Overlay */}
+                <div className="h-52 bg-slate-900 relative overflow-hidden">
+                  {/* Actual Screenshot */}
+                  <Image 
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover opacity-40 group-hover:opacity-100 transition-opacity duration-700"
+                  />
                   
-                  {/* Category Pill */}
-                  <div className="absolute bottom-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[9px] text-white font-bold border border-white/20 uppercase tracking-widest">
-                    {project.category}
+                  {/* The Hacker Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50 group-hover:from-slate-900/80 transition-all duration-500"></div>
+                  
+                  {/* Floating Terminal Text */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                    <div className="font-mono text-sky-400/60 text-[8px] leading-relaxed select-none pointer-events-none group-hover:text-white/40">
+                      {`$ init --vibe-check\n$ fetching_assets...\n$ build: ${project.title.toLowerCase().replace(/\s+/g, '_')}\n$ optimized: true`}
+                    </div>
+                    
+                    <div className="px-3 py-1 self-start bg-white/10 backdrop-blur-md rounded-full text-[9px] text-white font-bold border border-white/20 uppercase tracking-widest">
+                      {project.category}
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-8 flex flex-col min-h-[300px]">
+                <div className="p-8 flex flex-col min-h-[280px]">
                   <div className="flex-1 space-y-4">
                     <h4 className="text-2xl font-display font-bold text-slate-900 group-hover:text-sky-600 transition-colors">{project.title}</h4>
                     <p className="text-slate-500 text-sm font-medium leading-relaxed line-clamp-3">{project.desc}</p>
@@ -156,7 +168,7 @@ export default function ProofOfWork() {
                     </div>
                     
                     <button className="flex items-center gap-2 text-xs font-bold text-sky-500 hover:text-slate-900 transition-all uppercase tracking-widest group/btn">
-                      Details <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      Explore Case <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>

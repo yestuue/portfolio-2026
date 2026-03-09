@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,84 +40,87 @@ export default function About() {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-[#FAFAFA] text-[#0A0A0F]">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+    <section id="about" ref={sectionRef} className="py-24 bg-white text-slate-900 border-y border-slate-100">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center px-6">
         
-        {/* Left Column: Avatar */}
-        <div className="md:col-span-4 flex flex-col items-center">
-          <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl mb-6 group">
+        {/* Left Column: Avatar & Brand Mark */}
+        <div className="lg:col-span-5 flex flex-col items-center lg:items-start relative">
+          <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-[3rem] overflow-hidden border-8 border-slate-50 shadow-2xl group">
             <Image 
               src="/samuel-photo.png" 
               alt="Samuel Opeyemi" 
               fill 
-              className="object-cover group-hover:scale-105 transition-transform duration-500" 
+              className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" 
             />
+            {/* Soft Overlay */}
+            <div className="absolute inset-0 bg-sky-500/5 group-hover:bg-transparent transition-colors"></div>
           </div>
-          <div className="flex items-center gap-2 px-5 py-2.5 bg-white rounded-full shadow-sm border border-gray-100 font-medium text-sm">
+          
+          {/* Status Badge */}
+          <div className="mt-8 flex items-center gap-3 px-6 py-3 bg-white rounded-2xl shadow-xl shadow-slate-100 border border-slate-100 font-bold text-xs uppercase tracking-widest text-slate-600">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
             </span>
-            Available for Projects
+            Based in Lagos, Nigeria
           </div>
         </div>
 
         {/* Right Column: Content */}
-        <div className={`md:col-span-8 space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`lg:col-span-7 space-y-10 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
           <div className="space-y-4">
-            <h3 className="font-mono text-sm tracking-widest text-[#00D4FF] font-bold uppercase">— About Samuel</h3>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight">
-              I Build Systems That <br/>Solve Real Problems
+            <h3 className="font-mono text-[10px] tracking-[0.3em] text-sky-600 font-bold uppercase">— Technical Profile</h3>
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-slate-900 leading-[0.95]">
+              Architecting Systems That <br/>
+              <span className="text-sky-500">Solve Real Problems.</span>
             </h2>
           </div>
 
-          <div className="space-y-4 text-lg text-gray-600 leading-relaxed font-body">
+          <div className="space-y-6 text-lg text-slate-500 font-medium leading-relaxed max-w-2xl">
             <p>
-              I'm Samuel Opeyemi, a full-stack developer and blockchain engineer based in Lagos, Nigeria. 
-              I specialize in building problem-solving applications — from production-grade AI products to 
-              audited smart contracts deployed on mainnet.
+              I'm Samuel Opeyemi, a full-stack engineer and blockchain architect. 
+              I specialize in bridging the gap between <span className="text-slate-900 font-bold underline decoration-sky-500/20">complex backend logic</span> and 
+              <span className="text-slate-900 font-bold underline decoration-sky-500/20"> seamless user experiences</span>.
             </p>
             <p>
-              With 5+ years of experience shipping web, mobile, and blockchain solutions for clients across 
-              Nigeria, the US, and the UK, I don't just write code — I architect systems that work, scale, 
-              and deliver measurable results.
+              With half a decade of experience shipping for global clients, I focus on building 
+              high-performance AI tools and audited Web3 infrastructure that drive measurable business growth.
             </p>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 pt-6 border-t border-gray-200">
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 py-8 border-y border-slate-100">
             {stats.map((stat, i) => (
-              <div key={i} className="flex flex-col">
-                <span className="text-3xl font-display font-bold text-gray-900">
+              <div key={i} className="flex flex-col space-y-1">
+                <span className="text-3xl font-display font-bold text-slate-900">
                   {isVisible ? stat.value : 0}{stat.suffix}
                 </span>
-                <span className="text-sm font-medium text-gray-500 uppercase tracking-wide">{stat.label}</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{stat.label}</span>
               </div>
             ))}
           </div>
 
-          {/* Progress Bars */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 pt-6">
+          {/* Core Proficiencies */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             {skills.map((skill, i) => (
-              <div key={i} className="space-y-2">
-                <div className="flex justify-between text-sm font-mono font-bold">
-                  <span>{skill.name}</span>
-                  <span className="text-[#00D4FF]">{skill.level}%</span>
+              <div key={i} className="space-y-3">
+                <div className="flex justify-between items-end">
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-700">{skill.name}</span>
+                  <span className="text-sm font-mono font-bold text-sky-600">{skill.level}%</span>
                 </div>
-                <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                  <div 
-                    className="bg-[#00D4FF] h-full rounded-full transition-all duration-1500 ease-out"
-                    style={{ 
-                      width: isVisible ? `${skill.level}%` : '0%', 
-                      transitionDelay: `${i * 100}ms` 
-                    }}
+                <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: isVisible ? `${skill.level}%` : 0 }}
+                    transition={{ duration: 1.5, delay: i * 0.1, ease: "circOut" }}
+                    className="bg-sky-500 h-full rounded-full"
                   />
                 </div>
               </div>
             ))}
           </div>
-
         </div>
+
       </div>
     </section>
   );

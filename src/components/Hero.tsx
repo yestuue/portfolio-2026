@@ -43,7 +43,6 @@ export default function Hero() {
               Samuel <br />
               <span className="relative inline-block text-sky-500 mt-2">
                 Opeyemi
-                {/* SVG Optimization: preserveAspectRatio="none" ensures perfect scaling on mobile */}
                 <svg 
                   className="absolute w-full h-[15px] -bottom-3 left-0 text-sky-200" 
                   viewBox="0 0 300 15" 
@@ -74,16 +73,21 @@ export default function Hero() {
           {/* Verification Bar */}
           <div className="flex items-center gap-6 pt-2">
             <div className="flex -space-x-3">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 shadow-sm flex items-center justify-center text-[10px] font-bold text-slate-400">
-                  User
+              {['/user1.png', '/user2.png', '/user3.png'].map((src, i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 shadow-sm overflow-hidden relative">
+                  <Image 
+                    src={src} 
+                    alt="Trusted Client" 
+                    fill 
+                    className="object-cover grayscale hover:grayscale-0 transition-all"
+                  />
                 </div>
               ))}
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <div className="flex text-amber-400">
-                   {[...Array(5)].map((_, i) => <span key={i}>★</span>)}
+                    {[...Array(5)].map((_, i) => <span key={i}>★</span>)}
                 </div>
                 <span className="text-xs font-bold text-slate-900 uppercase">Top Rated</span>
               </div>
@@ -106,7 +110,6 @@ export default function Hero() {
         {/* RIGHT COLUMN: VISUAL IDENTITY */}
         <div className="relative flex justify-center lg:justify-end min-h-[550px]">
           
-          {/* Rotating text badge */}
           <div className="absolute -top-10 right-0 w-32 h-32 md:w-44 md:h-44 animate-spin-slow z-30">
             <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-20">
               <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
@@ -116,7 +119,7 @@ export default function Hero() {
             </svg>
           </div>
 
-          {/* Social Links (Side Bar) */}
+          {/* Social Links Bar */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 z-40 hidden xl:flex">
             <div className="transform -rotate-90 origin-bottom font-mono text-[10px] font-bold text-slate-300 tracking-[0.3em] uppercase mb-16">
               — Connectivity
@@ -126,17 +129,15 @@ export default function Hero() {
               { icon: Linkedin, link: "https://www.linkedin.com/in/samuel-opeyemii" },
               { icon: Twitter, link: "https://x.com/mrsamuelopeyemi" }
             ].map((social, i) => (
-              <Link key={i} href={social.link} className="p-2 text-slate-300 hover:text-sky-500 hover:scale-125 transition-all">
+              <Link key={i} href={social.link} target="_blank" className="p-2 text-slate-300 hover:text-sky-500 hover:scale-125 transition-all">
                 <social.icon className="w-5 h-5" />
               </Link>
             ))}
           </div>
 
-          {/* Professional Photo Container */}
+          {/* Main Photo Container */}
           <div className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
-            {/* Layered Glow Backgrounds */}
             <div className="absolute inset-0 rounded-full bg-sky-400/10 blur-[100px] animate-pulse"></div>
-            <div className="absolute inset-20 rounded-full bg-blue-500/10 blur-[60px] animate-pulse delay-700"></div>
             
             <div className="absolute inset-8 rounded-[3rem] bg-white shadow-2xl overflow-hidden border-[12px] border-slate-100/50">
                 <Image 
@@ -146,11 +147,10 @@ export default function Hero() {
                   priority
                   className="object-cover object-top" 
                 />
-                {/* Overlay gradient for depth */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
             </div>
 
-            {/* Float Cards */}
+            {/* Floating Tags */}
             <motion.div 
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
@@ -170,7 +170,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Ticker Footer (Secondary Accent) */}
+      {/* Marquee Ticker */}
       <div className="w-full h-12 bg-white overflow-hidden flex items-center border-t border-slate-100">
         <div className="flex whitespace-nowrap font-mono text-[10px] font-bold text-slate-300 uppercase tracking-[0.4em] animate-marquee">
           {"Engineering Performance + Delivering Value + Shipping Code + Architecture + ".repeat(15)}
