@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { GitCommit, Link as LinkIcon, MapPin, Globe, Activity } from "lucide-react";
 
-// Added the region prop here
 export default function LiveStatus({ region }: { region: string }) {
   const [time, setTime] = useState<string>("");
 
@@ -28,16 +27,17 @@ export default function LiveStatus({ region }: { region: string }) {
   const StatusItem = ({ icon: Icon, text, color }: { icon: any, text: string, color: string }) => (
     <div className="flex items-center gap-3 px-12 whitespace-nowrap group">
       <Icon className={`w-3.5 h-3.5 ${color} transition-transform group-hover:scale-125`} />
-      <span className="text-slate-400 font-mono text-[10px] tracking-[0.15em] font-bold uppercase">
+      {/* Changed to text-white and font-black for maximum visibility */}
+      <span className="text-white font-mono text-[10px] tracking-[0.2em] font-black uppercase">
         {text}
       </span>
     </div>
   );
 
   return (
-    <div className="w-full bg-slate-950 border-b border-slate-800/50 py-3 relative z-30 overflow-hidden">
-      {/* Edge Fading Mask */}
-      <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 opacity-100 md:opacity-100" />
+    <div className="w-full bg-slate-950 border-b border-white/5 py-3 relative z-30 overflow-hidden">
+      {/* Edge Fading Mask - Darker for more focus on the white text */}
+      <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 opacity-100" />
       
       <div className="flex animate-marquee hover:[animation-play-state:paused] cursor-default">
         {[...Array(2)].map((_, i) => (
@@ -53,7 +53,7 @@ export default function LiveStatus({ region }: { region: string }) {
               </span>
             </div>
 
-            {/* Dynamic IP Detection Item */}
+            {/* Dynamic Items - All now featuring bold white text */}
             <StatusItem 
               icon={Globe} 
               color="text-emerald-400" 

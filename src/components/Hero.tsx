@@ -70,17 +70,15 @@ export default function Hero() {
             ❝ "Samuel's engineering depth and marketing insight transformed our product launch." ❞
           </div>
 
-          {/* Verification Bar */}
+          {/* Verification Bar: Updated with bolder brand labels */}
           <div className="flex items-center gap-6 pt-2">
             <div className="flex -space-x-3">
-              {['/user1.png', '/user2.png', '/user3.png'].map((src, i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 shadow-sm overflow-hidden relative">
-                  <Image 
-                    src={src} 
-                    alt="Trusted Client" 
-                    fill 
-                    className="object-cover grayscale hover:grayscale-0 transition-all"
-                  />
+              {['Fiverr', 'Upwork', 'Meta'].map((brand, i) => (
+                <div 
+                  key={i} 
+                  className="w-12 h-12 rounded-full border-4 border-slate-50 bg-white shadow-lg flex items-center justify-center text-[9px] font-black text-slate-900 uppercase tracking-tighter transition-transform hover:scale-110 hover:z-10"
+                >
+                  {brand}
                 </div>
               ))}
             </div>
@@ -170,9 +168,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Marquee Ticker */}
-      <div className="w-full h-12 bg-white overflow-hidden flex items-center border-t border-slate-100">
-        <div className="flex whitespace-nowrap font-mono text-[10px] font-bold text-slate-300 uppercase tracking-[0.4em] animate-marquee">
+      {/* Marquee Ticker: Updated to pure white and font-black */}
+      <div className="w-full h-14 bg-slate-950 overflow-hidden flex items-center border-t border-white/5">
+        <div className="flex whitespace-nowrap font-mono text-[11px] font-black text-white uppercase tracking-[0.5em] animate-marquee">
           {"Engineering Performance + Delivering Value + Shipping Code + Architecture + ".repeat(15)}
         </div>
       </div>
