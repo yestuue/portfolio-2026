@@ -21,7 +21,8 @@ export const metadata: Metadata = {
   keywords: [
     "Samuel Opeyemi developer", "Full Stack Developer Lagos Nigeria", 
     "Blockchain Developer Nigeria", "AI Developer Lagos", 
-    "Shopify Developer Nigeria", "Smart Contract Developer Africa"
+    "Shopify Developer Nigeria", "Smart Contract Developer Africa",
+    "Big Sam developer"
   ],
   metadataBase: new URL('https://samuelopeyemi.com'),
   alternates: {
@@ -69,7 +70,8 @@ export default function RootLayout({
       className={`${jakarta.variable} ${inter.variable} scroll-smooth`} 
       suppressHydrationWarning
     >
-      <body className="antialiased selection:bg-sky-100 selection:text-sky-900 transition-colors duration-300">
+      {/* FIXED: selection color now uses Brick Brown for brand consistency */}
+      <body className="antialiased selection:bg-[#c2410c] selection:text-white transition-colors duration-300">
         <ThemeProvider 
           attribute="class" 
           defaultTheme="dark" 
