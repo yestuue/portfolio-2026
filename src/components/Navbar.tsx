@@ -9,7 +9,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -19,15 +19,14 @@ export default function Navbar() {
     <nav
       className={`fixed left-0 right-0 z-[100] transition-all duration-500 flex items-center ${
         scrolled 
-          ? "glass-nav py-2 shadow-md top-0 text-white" // Force white text here
-          : "py-6 bg-transparent top-[44px] text-slate-900 dark:text-white"
+          ? "glass-nav py-2 shadow-md top-0" 
+          : "py-6 bg-transparent top-[44px]" 
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 max-w-7xl h-10 md:h-12">
-        {/* Brand Logo */}
+        {/* Pass scrolled prop to Logo so it knows to turn white */}
         <Link href="/" className="outline-none flex items-center">
-          {/* Logo will now inherit white color from nav when scrolled */}
-          <Logo />
+          <Logo scrolled={scrolled} />
         </Link>
 
         {/* Navigation Links */}
@@ -37,7 +36,9 @@ export default function Navbar() {
               key={link}
               href={`#${link.toLowerCase()}`}
               className={`relative text-[13px] font-black uppercase tracking-widest transition-colors group ${
-                scrolled ? "text-white/90 hover:text-white" : "text-slate-900 dark:text-white hover:text-[#c2410c]"
+                scrolled 
+                  ? "text-white hover:text-white/80" 
+                  : "text-slate-900 dark:text-white hover:text-[#c2410c]"
               }`}
             >
               {link}
@@ -57,12 +58,6 @@ export default function Navbar() {
             Contact Me
           </Link>
         </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-          <div className={`w-5 h-[2px] ${scrolled ? "bg-white" : "bg-slate-950 dark:bg-white"}`}></div>
-          <div className="w-3.5 h-[2px] bg-[#c2410c] ml-auto mr-1.5"></div>
-        </button>
       </div>
     </nav>
   );
