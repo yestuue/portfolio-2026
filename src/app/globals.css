@@ -6,16 +6,20 @@
 
 @layer base {
   :root {
+    /* Standardized Minimal Spacing System */
+    --section-padding: 4.5rem;   /* Reduced from bulky 8-10rem */
+    --nav-height: 70px;
+    
     /* LIGHT MODE: Tactile & Clean */
     --color-primary: #0ea5e9;
     --color-bg-light: #f8fafc;
     --color-text-main: #0f172a;
     --border-color: #e2e8f0;
     
-    /* 3D Depth Shadows - Light Mode */
+    /* 3D Depth Shadows */
     --shadow-3d: 0 6px 0 0 #e2e8f0;
     --shadow-3d-hover: 0 4px 0 0 #e2e8f0;
-    --glass-bg: rgba(248, 250, 252, 0.8);
+    --glass-bg: rgba(248, 250, 252, 0.85);
   }
 
   .dark {
@@ -24,10 +28,9 @@
     --color-text-main: #f8fafc;
     --border-color: rgba(255, 255, 255, 0.08);
     
-    /* 3D Depth Shadows - Dark Mode */
     --shadow-3d: 0 6px 0 0 #000000;
     --shadow-3d-hover: 0 4px 0 0 #000000;
-    --glass-bg: rgba(2, 6, 23, 0.8);
+    --glass-bg: rgba(2, 6, 23, 0.85);
   }
 
   * {
@@ -35,28 +38,34 @@
     border-color: var(--border-color); 
   }
 
-  html,
-  body {
+  html, body {
     background-color: var(--color-bg-light);
     color: var(--color-text-main);
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease;
     -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer utilities {
-  /* The "Bezel" look: Lighter top and left borders to simulate light catching edges */
+  /* Use this class on all <section> tags to keep margins perfect */
+  .section-tight {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+  }
+
   .bezel-edge {
     @apply border-t border-l border-white/20 dark:border-white/5;
   }
 
-  /* 3D Push Button Effect */
   .btn-3d {
     box-shadow: var(--shadow-3d);
     @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
-    hover:box-shadow: var(--shadow-3d-hover);
+  }
+  /* Fixed the hover syntax error here */
+  .btn-3d:hover {
+    box-shadow: var(--shadow-3d-hover);
   }
 }
 
@@ -71,10 +80,11 @@
 .animate-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; will-change: transform; }
 .animate-float { animation: float 6s ease-in-out infinite; }
 
-/* Premium Elements */
+/* Premium Glass Navigation */
 .glass-nav {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
 }
 

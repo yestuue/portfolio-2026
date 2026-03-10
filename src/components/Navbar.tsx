@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,43 +17,48 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? "glass-nav py-3 shadow-xl border-b border-white/5" 
-          : "py-6 bg-slate-900/80 backdrop-blur-sm"
+          ? "glass-nav py-2.5 shadow-sm" // Minimal padding when scrolled
+          : "py-4 bg-transparent"        // Minimal padding at top
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-full px-6">
-        {/* Clean Logo Integration */}
-        <Logo />
+      <div className="container mx-auto flex items-center justify-between px-6 max-w-7xl">
+        {/* Brand Logo */}
+        <Link href="/" className="group outline-none">
+          <Logo />
+        </Link>
 
-        {/* Bold White Nav Links */}
-        <div className="hidden lg:flex items-center gap-10 font-black text-[11px] uppercase tracking-[0.2em] text-white">
+        {/* --- Navigation Links --- */}
+        <div className="hidden md:flex items-center gap-10 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
           {["Home", "Services", "About", "Projects", "Blogs"].map((link) => (
             <Link
               key={link}
               href={`#${link.toLowerCase()}`}
-              className="relative group transition-all hover:text-sky-400"
+              className="relative transition-colors hover:text-sky-600 dark:hover:text-sky-400 group"
             >
               {link}
-              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-sky-400 transition-all duration-300 group-hover:w-full"></span>
+              {/* Tight animated underline */}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
         </div>
 
-        {/* Action Zone */}
-        <div className="flex items-center gap-5">
-          <ThemeToggle />
-          
-          <div className="hidden md:block">
-            <Link
-              href="#contact"
-              className="px-8 py-3.5 rounded-xl text-slate-950 font-black text-[11px] uppercase tracking-widest transition-all bg-white hover:bg-sky-400 hover:text-white active:scale-95 inline-block"
-            >
-              Contact Me
-            </Link>
-          </div>
+        {/* --- Call to Action: Now with 3D Tactile Feel --- */}
+        <div className="hidden md:block">
+          <Link
+            href="#contact"
+            className="px-6 py-2.5 rounded-xl text-white font-black text-[10px] uppercase tracking-widest bg-slate-900 dark:bg-sky-500 btn-3d inline-block"
+          >
+            Contact Me
+          </Link>
         </div>
+
+        {/* --- Minimal Mobile Menu Toggle --- */}
+        <button className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10">
+          <div className="w-5 h-[1.5px] bg-slate-900 dark:bg-white"></div>
+          <div className="w-3 h-[1.5px] bg-slate-900 dark:bg-white ml-auto mr-2.5"></div>
+        </button>
       </div>
     </nav>
   );
