@@ -35,33 +35,33 @@ export default function Hero() {
   }, [taglines.length]);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-50 dark:bg-slate-950">
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 py-24">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-50 dark:bg-slate-950 pt-20 pb-12">
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
         
         {/* LEFT COLUMN: BRAND & AUTHORITY */}
-        <div className="flex flex-col items-start space-y-8">
+        <div className="flex flex-col items-start space-y-6">
           
-          {/* HIGH-TACTILE 3D BADGE */}
+          {/* TACTILE ENGINEERING STATUS BADGE - Fixed "Vibe-Coded" look */}
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full 
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl 
                        bg-white dark:bg-slate-900 
                        border-t border-l border-slate-100 dark:border-white/10
                        shadow-[0_4px_0_0_#e2e8f0] dark:shadow-[0_4px_0_0_#000]
-                       transition-all duration-100 cursor-default"
+                       transition-all duration-100 cursor-default mb-2"
           >
-            <span className="relative flex h-2 w-2">
+            <div className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400">
-              Available for New Projects
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+              Available for <span className="text-sky-600 dark:text-sky-400">Projects</span>
             </span>
           </motion.div>
 
-          <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tight text-slate-900 dark:text-white leading-[0.9]">
+          <div className="space-y-4">
+            <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tight text-slate-900 dark:text-white leading-[0.85]">
               Samuel <br />
               <span className="relative inline-block text-sky-500 mt-2">
                 Opeyemi
@@ -76,7 +76,7 @@ export default function Hero() {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl font-medium text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium text-slate-500 dark:text-slate-400 max-w-lg leading-tight">
               Full-Stack Developer specializing in <span className="text-slate-900 dark:text-white font-bold underline decoration-sky-500/30">Web3 Infrastructure</span> & <span className="text-slate-900 dark:text-white font-bold underline decoration-sky-500/30">AI Solutions</span>.
             </p>
 
@@ -107,17 +107,17 @@ export default function Hero() {
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <div className="flex text-amber-400">
-                    {[...Array(5)].map((_, i) => <span key={i}>★</span>)}
+                    {[...Array(5)].map((_, i) => <span key={i} className="text-xs">★</span>)}
                 </div>
-                <span className="text-xs font-bold text-slate-900 dark:text-white uppercase">Top Rated</span>
+                <span className="text-[10px] font-bold text-slate-900 dark:text-white uppercase">Top Rated</span>
               </div>
-              <p className="text-xs font-medium text-slate-500">
+              <p className="text-[10px] font-medium text-slate-500">
                 <span className="text-emerald-600 font-bold">● Upwork Verified</span> · 20+ Global Clients
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-5 pt-6">
+          <div className="flex flex-wrap items-center gap-5 pt-4">
             {/* TACTILE 3D CTA BUTTONS */}
             <Link 
               href="#projects" 
@@ -141,7 +141,7 @@ export default function Hero() {
         </div>
 
         {/* RIGHT COLUMN: VISUAL IDENTITY */}
-        <div className="relative flex justify-center lg:justify-end min-h-[550px]">
+        <div className="relative flex justify-center lg:justify-end min-h-[500px]">
           {/* BEVELED CIRCLE PATH */}
           <div className="absolute -top-10 right-0 w-32 h-32 md:w-44 md:h-44 animate-spin-slow z-30">
             <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-20 dark:opacity-40">
@@ -153,7 +153,7 @@ export default function Hero() {
           </div>
 
           {/* MAIN PHOTO WITH 3D SHADOW DEPTH */}
-          <div className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
+          <div className="relative w-full max-w-[400px] aspect-square flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-sky-400/10 dark:bg-sky-400/5 blur-[100px] animate-pulse"></div>
             <div className="absolute inset-8 rounded-[3.5rem] bg-white dark:bg-slate-900 shadow-2xl overflow-hidden 
                             border-[12px] border-slate-100/50 dark:border-white/5 
@@ -194,23 +194,23 @@ export default function Hero() {
       </div>
 
       {/* RECESSED MARQUEE FOOTER */}
-      <div className="w-full h-24 bg-slate-950 flex items-center border-t-4 border-slate-900 overflow-hidden relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.5)]">
-         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10 pointer-events-none opacity-80" />
-         <div className="flex animate-marquee whitespace-nowrap items-center gap-16 px-8 will-change-transform">
+      <div className="w-full h-20 bg-slate-950 flex items-center border-t-4 border-slate-900 overflow-hidden relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.5)] mt-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10 pointer-events-none opacity-80" />
+          <div className="flex animate-marquee whitespace-nowrap items-center gap-16 px-8 will-change-transform">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 md:gap-24">
-                <Apple className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <Github className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <span className="text-white font-black text-2xl opacity-40 italic tracking-tighter">PUMA</span>
-                <Chrome className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <Instagram className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <span className="text-white font-black text-2xl opacity-40 lowercase tracking-tighter">hulu</span>
-                <Youtube className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <Framer className="w-8 h-8 text-white opacity-40 hover:opacity-100 transition-opacity" />
-                <span className="text-white font-black text-2xl opacity-40 italic tracking-tighter underline">adidas</span>
+                <Apple className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Github className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-xl opacity-40 italic tracking-tighter">PUMA</span>
+                <Chrome className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Instagram className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-xl opacity-40 lowercase tracking-tighter">hulu</span>
+                <Youtube className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <Framer className="w-6 h-6 text-white opacity-40 hover:opacity-100 transition-opacity" />
+                <span className="text-white font-black text-xl opacity-40 italic tracking-tighter underline">adidas</span>
               </div>
             ))}
-         </div>
+          </div>
       </div>
     </section>
   );
