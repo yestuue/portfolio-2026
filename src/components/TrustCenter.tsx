@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, CheckCircle2, LockKeyhole, Clock, Star } from "lucide-react";
+import { ShieldCheck, CheckCircle2, LockKeyhole, Clock, Star, Zap, Globe, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function TrustCenter() {
@@ -16,23 +16,28 @@ export default function TrustCenter() {
   const credentials = ["Upwork Top Rated", "GitHub Pro", "LinkedIn Verified", "SecureVault Architecture", "AI Ethics Compliant"];
 
   return (
-    <section id="trust" className="py-24 bg-slate-50 relative overflow-hidden">
+    <section id="trust" className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
       <div className="container mx-auto px-6">
+        
+        {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
-          <h3 className="font-mono text-[10px] tracking-[0.3em] text-sky-600 font-bold uppercase">— Security & Workflow</h3>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 leading-tight">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-900 border-t border-l border-slate-100 dark:border-white/10 shadow-[0_2px_0_0_#e2e8f0] dark:shadow-[0_2px_0_0_#000] mb-4">
+            <Shield className="w-3 h-3 text-sky-500" />
+            <span className="font-mono text-[10px] tracking-[0.3em] text-sky-600 dark:text-sky-400 font-bold uppercase">Security & Workflow</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-slate-900 dark:text-white leading-[0.9] tracking-tighter">
             Your Investment is Protected. <br/>
-            <span className="text-slate-400 font-medium italic text-3xl md:text-4xl">Every single line of code.</span>
+            <span className="text-slate-400 dark:text-slate-500 font-medium italic text-2xl md:text-4xl">Every single line of code.</span>
           </h2>
         </div>
 
-        {/* Scrolling Credentials Bar - Uses your existing marquee utility */}
-        <div className="w-full bg-white border-y border-slate-200 py-6 mb-20 overflow-hidden flex items-center shadow-sm">
-          <div className="flex whitespace-nowrap font-mono text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] animate-marquee">
+        {/* Credentials Marquee with Recessed Effect */}
+        <div className="w-full bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-white/5 py-8 mb-20 overflow-hidden flex items-center shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)]">
+          <div className="flex whitespace-nowrap font-mono text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em] animate-marquee">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="flex items-center space-x-12 px-6">
+              <div key={i} className="flex items-center space-x-16 px-8">
                 {credentials.map((cred, j) => (
-                  <span key={j} className="flex items-center gap-3">
+                  <span key={j} className="flex items-center gap-3 group transition-colors hover:text-sky-500">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500" /> {cred}
                   </span>
                 ))}
@@ -41,78 +46,81 @@ export default function TrustCenter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
-          {/* Timeline: Milestone Flow */}
-          <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50">
-            <h4 className="text-2xl font-display font-bold text-slate-900 flex items-center gap-3 mb-10">
+          {/* Timeline: 3D Milestone Flow */}
+          <div className="bg-white dark:bg-slate-900 p-10 rounded-[3rem] border-t border-l border-white dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+            <h4 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-3 mb-12 uppercase tracking-tighter">
               <LockKeyhole className="w-6 h-6 text-sky-500" /> Milestone Escrow Flow
             </h4>
             
-            <div className="relative border-l-2 border-slate-100 ml-4 space-y-10">
+            <div className="relative border-l-2 border-slate-100 dark:border-white/5 ml-4 space-y-12">
               {milestones.map((m, i) => (
-                <div key={i} className="relative pl-10 group">
-                  <div className="absolute -left-[19px] top-0 w-9 h-9 rounded-xl bg-white border-2 border-slate-100 flex items-center justify-center font-mono text-xs font-bold text-slate-400 transition-colors group-hover:border-sky-500 group-hover:text-sky-600">
+                <div key={i} className="relative pl-12 group">
+                  {/* Tactile Step Number */}
+                  <div className="absolute -left-[21px] top-0 w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 border-t border-l border-slate-100 dark:border-white/10 flex items-center justify-center font-mono text-xs font-black text-slate-400 shadow-[0_4px_0_0_#e2e8f0] dark:shadow-[0_4px_0_0_#000] transition-all group-hover:translate-y-[-2px] group-hover:text-sky-500 group-hover:shadow-[0_6px_0_0_#e2e8f0] dark:group-hover:shadow-[0_6px_0_0_#000]">
                     {m.step}
                   </div>
-                  <h5 className="text-lg font-bold font-display text-slate-900">{m.title}</h5>
-                  <p className="text-slate-500 font-medium text-sm mt-1 leading-relaxed">{m.desc}</p>
+                  <h5 className="text-xl font-black font-display text-slate-900 dark:text-white uppercase tracking-tight">{m.title}</h5>
+                  <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mt-2 leading-relaxed max-w-sm">{m.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column: Dashboard & Testimonial */}
+          {/* Right Column: Dashboards */}
           <div className="space-y-8">
-            {/* Uptime Dashboard */}
-            <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl">
-               <div className="absolute top-0 right-0 p-8 opacity-5">
-                 <ShieldCheck className="w-40 h-40" />
-               </div>
-               <div className="relative z-10">
-                 <h4 className="text-xl font-display font-bold mb-8 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Live Product Health
-                 </h4>
-                 <div className="space-y-5">
-                   {['Neroload Validation Engine', 'SecureVault Pro Gateway', 'Icon Wrist Hub Storefront'].map((app, i) => (
-                     <div key={i} className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
-                       <span className="font-medium text-slate-300 font-mono text-xs uppercase tracking-wider">{app}</span>
-                       <div className="flex items-center gap-3 text-emerald-400 font-mono text-[10px] font-bold">
-                         100% Uptime
-                       </div>
-                     </div>
-                   ))}
-                 </div>
-               </div>
+            
+            {/* Live Product Health Dashboard */}
+            <div className="bg-slate-900 dark:bg-slate-950 rounded-[3rem] p-10 text-white relative overflow-hidden border-t border-l border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4)]">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <ShieldCheck className="w-40 h-40 text-sky-500" />
+                </div>
+                <div className="relative z-10">
+                  <h4 className="text-xs font-mono font-black mb-10 flex items-center gap-3 uppercase tracking-[0.2em] text-slate-400">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_#10b981]"></span>
+                    Live Network Availability
+                  </h4>
+                  <div className="space-y-4">
+                    {['Neroload Validation Engine', 'SecureVault Pro Gateway', 'Icon Wrist Hub Storefront'].map((app, i) => (
+                      <div key={i} className="flex items-center justify-between p-5 bg-white/5 rounded-[1.5rem] border border-white/5 hover:bg-white/10 transition-all hover:translate-x-2 group">
+                        <span className="font-bold text-slate-300 font-mono text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">{app}</span>
+                        <div className="flex items-center gap-3 text-emerald-400 font-mono text-[10px] font-black bg-emerald-500/10 px-3 py-1.5 rounded-full">
+                          <Zap className="w-3 h-3 fill-current" /> 100% UP
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
             </div>
 
             {/* Premium Testimonial Card */}
-            <div className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-xl relative group">
-               <div className="flex items-start gap-5 mb-6">
-                 <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 border border-slate-100 bg-slate-50 flex items-center justify-center font-bold text-slate-300">
+            <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-10 border-t border-l border-white dark:border-white/10 shadow-2xl relative group">
+               <div className="flex items-start gap-5 mb-8">
+                 <div className="w-16 h-16 rounded-[1.5rem] overflow-hidden shrink-0 border-t border-l border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-slate-800 shadow-[0_4px_0_0_#e2e8f0] dark:shadow-[0_4px_0_0_#000] flex items-center justify-center font-black text-slate-300 dark:text-slate-600 text-xl">
                    MR
                  </div>
-                 <div>
-                   <h5 className="font-display font-bold text-slate-900 text-lg">Michael R.</h5>
-                   <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">CEO, Fintech Partner (USA)</p>
-                   <div className="flex text-amber-400 mt-1">
-                     {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
+                 <div className="pt-1">
+                   <h5 className="font-display font-black text-slate-900 dark:text-white text-xl uppercase tracking-tighter">Michael R.</h5>
+                   <p className="text-sky-600 dark:text-sky-400 text-[10px] font-black uppercase tracking-[0.2em]">CEO, Fintech Partner (USA)</p>
+                   <div className="flex text-amber-400 mt-2 gap-0.5">
+                     {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
                    </div>
                  </div>
                </div>
-               <p className="font-medium text-slate-600 italic leading-relaxed text-base">
+               <p className="font-medium text-slate-600 dark:text-slate-400 italic leading-relaxed text-lg border-l-4 border-slate-100 dark:border-white/5 pl-6 py-2">
                  "Samuel operates with the precision of a large agency. The milestone-based 
-                 delivery combined with daily Loom updates made our complex Web3 integration 
-                 feel effortless."
+                 delivery combined with daily updates made our complex integration feel effortless."
                </p>
-               <div className="mt-8 pt-6 border-t border-slate-50 flex justify-between items-center">
-                 <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
-                   <Clock className="w-3 h-3 text-emerald-500"/> Platform Verified
+               <div className="mt-10 pt-8 border-t border-slate-50 dark:border-white/5 flex justify-between items-center">
+                 <span className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-[0.25em] flex items-center gap-2">
+                   <Globe className="w-4 h-4 text-emerald-500"/> Verified Engagement
                  </span>
-                 <span className="text-[10px] font-mono font-bold text-sky-500 bg-sky-50 px-3 py-1 rounded-full uppercase tracking-widest">
-                   Top Rated
-                 </span>
+                 <div className="bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl">
+                   <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
+                     Top Rated
+                   </span>
+                 </div>
                </div>
             </div>
           </div>

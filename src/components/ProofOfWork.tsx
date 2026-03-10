@@ -14,7 +14,7 @@ export default function ProofOfWork() {
     {
       title: "Luvly App",
       category: "📱 Mobile Apps",
-      image: "/projects/luvly.png",
+      image: "/user1.png", // Temporarily using existing public images to pass Vercel build
       desc: "High-performance iOS & Android hair inspiration app with AI trend discovery and personalized galleries.",
       tech: ["React Native", "Expo", "Firebase"],
       status: "App Store",
@@ -22,7 +22,7 @@ export default function ProofOfWork() {
     {
       title: "Neroload Mobile",
       category: "📱 Mobile Apps",
-      image: "/projects/neroload.png",
+      image: "/user2.png",
       desc: "Secure mobile gateway for gift card trading with real-time push notifications and instant wallet payouts.",
       tech: ["React Native", "Node.js", "PostgreSQL"],
       status: "Production",
@@ -30,7 +30,7 @@ export default function ProofOfWork() {
     {
       title: "NoFoldZone (NFZ)",
       category: "🛍 Shopify",
-      image: "/projects/nfz.png",
+      image: "/user3.png",
       desc: "Streetwear brand store with a custom WhatsApp checkout system and 'vibe-coded' UI architecture.",
       tech: ["Shopify", "Liquid", "JavaScript"],
       status: "Online",
@@ -38,7 +38,7 @@ export default function ProofOfWork() {
     {
       title: "RAG Support AI",
       category: "🤖 AI/LLM",
-      image: "/projects/rag-ai.png",
+      image: "/user1.png", 
       desc: "Enterprise compliance chatbot built with custom documentation RAG to reduce support tickets by 40%.",
       tech: ["Python", "LangChain", "OpenAI"],
       status: "Online",
@@ -46,7 +46,7 @@ export default function ProofOfWork() {
     {
       title: "DeFi Aggregator",
       category: "⛓ Blockchain",
-      image: "/projects/defi.png",
+      image: "/user2.png",
       desc: "Smart contracts for optimizing yield across multiple lending protocols. Audited and deployed on Polygon.",
       tech: ["Solidity", "Hardhat", "Ethers.js"],
       status: "Mainnet",
@@ -54,14 +54,17 @@ export default function ProofOfWork() {
     {
       title: "Icon Wrist Hub",
       category: "🛍 Shopify",
-      image: "/projects/icon-wrist.png",
+      image: "/user3.png",
       desc: "High-end watch e-commerce store focused on collection storytelling and premium brand identity.",
       tech: ["Shopify", "Liquid", "Marketing"],
       status: "Online",
     },
   ];
 
-  const filtered = filter === "All" ? projects : projects.filter(p => p.category.includes(filter));
+  // Robust filtering logic
+  const filtered = filter === "All" 
+    ? projects 
+    : projects.filter(p => p.category.toLowerCase().includes(filter.toLowerCase().replace(/[^a-z]/gi, '')));
 
   return (
     <section id="projects" className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
@@ -115,18 +118,17 @@ export default function ProofOfWork() {
                 key={project.title} 
                 className="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] border-t border-l border-slate-100 dark:border-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-2 flex flex-col"
               >
-                {/* Visual Header */}
                 <div className="h-56 bg-slate-100 dark:bg-slate-800 relative overflow-hidden m-3 rounded-[1.8rem]">
                   <Image 
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
                 </div>
 
-                {/* Content Card */}
                 <div className="p-8 pt-4 flex flex-col flex-1 space-y-5">
                   <div className="px-3 py-1 self-start bg-sky-50 dark:bg-sky-900/20 rounded-full text-[9px] text-sky-700 dark:text-sky-400 font-black uppercase tracking-widest border-t border-l border-white/20">
                     {project.category}
@@ -136,7 +138,6 @@ export default function ProofOfWork() {
                     <h4 className="text-2xl font-display font-bold text-slate-900 dark:text-white">{project.title}</h4>
                     <p className="text-slate-500 dark:text-slate-400 text-sm font-medium leading-relaxed line-clamp-3">{project.desc}</p>
                     
-                    {/* Tech List */}
                     <div className="flex flex-wrap gap-2 pt-1">
                       {project.tech.map(t => (
                         <span key={t} className="px-2.5 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 text-[10px] font-bold text-slate-500 dark:text-slate-400 rounded-lg uppercase tracking-tight">
@@ -146,7 +147,6 @@ export default function ProofOfWork() {
                     </div>
                   </div>
 
-                  {/* Tactile Footer Action */}
                   <div className="flex items-center justify-between pt-6 mt-auto border-t border-slate-100 dark:border-white/5">
                     <div className="flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-widest">
                       <span className="relative flex h-2 w-2">
