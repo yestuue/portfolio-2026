@@ -7,12 +7,13 @@
 @layer base {
   :root {
     /* --- THE "ARCHITECT" BRAND PALETTE --- */
-    --navy-base: #0f172a;        /* Professional Deep Navy */
-    --brick-main: #c2410c;       /* Authentic Brick Brown (Terra Cotta) */
-    --brick-depth: #9a3412;      /* Darker Brick for 3D edges */
+    --navy-base: #0f172a;        
+    --brick-main: #c2410c;       
+    --brick-depth: #9a3412;      
     --slate-ultra-light: #f8fafc;
     
-    /* Standardized Spacing */
+    /* Standardized Spacing & Layout Fixes */
+    --status-bar-height: 40px;   
     --section-padding: 4.5rem;   
     --nav-height: 64px;
     
@@ -21,7 +22,7 @@
     --color-text-main: var(--navy-base);
     --border-color: #e2e8f0;
     
-    /* 3D Depth Shadows - Using Navy for depth in Light Mode */
+    /* 3D Depth Shadows */
     --shadow-3d: 0 6px 0 0 #cbd5e1;
     --shadow-3d-hover: 0 4px 0 0 #cbd5e1;
     --shadow-brick: 0 6px 0 0 var(--brick-depth);
@@ -29,12 +30,10 @@
   }
 
   .dark {
-    /* DARK MODE MAPPING */
-    --color-bg-light: #020617;   /* Deepest Navy/Black */
+    --color-bg-light: #020617;   
     --color-text-main: #f8fafc;
     --border-color: rgba(255, 255, 255, 0.05);
     
-    /* 3D Shadows - Harder Black depth for Dark Mode */
     --shadow-3d: 0 6px 0 0 #000000;
     --shadow-3d-hover: 0 4px 0 0 #000000;
     --shadow-brick: 0 6px 0 0 #000000;
@@ -44,6 +43,13 @@
   * {
     box-sizing: border-box;
     border-color: var(--border-color); 
+    /* Force focus and selection to Brick */
+    outline-color: var(--brick-main);
+  }
+
+  ::selection {
+    background-color: var(--brick-main);
+    color: white;
   }
 
   html, body {
@@ -53,6 +59,7 @@
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s ease;
     -webkit-font-smoothing: antialiased;
+    padding-top: var(--status-bar-height); 
   }
 }
 
@@ -68,9 +75,9 @@
 
   /* Brick-Colored 3D Button Utility */
   .btn-brick {
-    background-color: var(--brick-main);
-    box-shadow: var(--shadow-brick);
-    color: white;
+    background-color: var(--brick-main) !important;
+    box-shadow: var(--shadow-brick) !important;
+    color: white !important;
     @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
   }
 
@@ -79,8 +86,20 @@
     @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
   }
   
-  .btn-3d:hover {
-    box-shadow: var(--shadow-3d-hover);
+  /* --- THE COLOR PURGE --- 
+     These force-override lingering Tailwind blue/green classes 
+  */
+  .text-sky-500, .text-sky-600, .text-blue-600, .text-emerald-500 {
+    color: var(--brick-main) !important;
+  }
+  .bg-sky-500, .bg-sky-600, .bg-blue-600, .bg-emerald-500, .bg-sky-50, .bg-blue-50 {
+    background-color: var(--brick-main) !important;
+  }
+  .decoration-sky-500, .decoration-sky-600, .decoration-[#c2410c]/30 {
+    text-decoration-color: var(--brick-main) !important;
+  }
+  .border-sky-500, .border-sky-600, .border-emerald-500 {
+    border-color: var(--brick-main) !important;
   }
 }
 

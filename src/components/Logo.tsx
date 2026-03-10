@@ -1,6 +1,6 @@
 export default function Logo() {
   return (
-    <div className="flex items-center group cursor-pointer select-none">
+    <div className="flex items-center group cursor-pointer select-none relative z-[60]">
       {/* THE BOLD NAME: Max weight for a 'Trusted' engineering stamp look */}
       <span className="font-display text-2xl md:text-3xl font-black tracking-tighter text-slate-900 dark:text-white transition-all group-hover:tracking-tight">
         Big Sam
