@@ -1,129 +1,123 @@
 "use client";
 
-import { ShieldCheck, CheckCircle2, LockKeyhole, Globe, Shield, Star, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ShieldCheck, LockKeyhole, Globe, Star, Zap, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function TrustCenter() {
-  const milestones = [
-    { step: "01", title: "Discovery Call", desc: "Free 30-min alignment session." },
-    { step: "02", title: "Escrow Locked", desc: "Milestone 1 funded securely via platform." },
-    { step: "03", title: "Part A Delivery", desc: "Samuel ships code, you review & approve." },
-    { step: "04", title: "Next Phase", desc: "Subsequent milestones unlocked." },
-    { step: "05", title: "Final Launch", desc: "QA testing and final sign-off." },
-    { step: "06", title: "Support", desc: "30-day post-launch technical care." }
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const testimonials = [
+    {
+      name: "Michael R.",
+      role: "CEO, Fintech Partner (USA)",
+      text: "Samuel operates with the precision of a large agency. The milestone-based delivery combined with daily updates made our complex integration feel effortless.",
+      initials: "MR"
+    },
+    {
+      name: "Sarah J.",
+      role: "Product Lead, Web3 Startup",
+      text: "Exceptional depth in blockchain architecture. He didn't just write code; he optimized our entire smart contract gas efficiency by 30%.",
+      initials: "SJ"
+    }
   ];
 
-  const credentials = ["Upwork Top Rated", "GitHub Pro", "LinkedIn Verified", "SecureVault Architecture", "AI Ethics Compliant"];
+  const next = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  const prev = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    // Replaced py-32 with section-tight for perfect, minimal engineering spacing
-    <section id="trust" className="section-tight bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden border-b border-slate-100 dark:border-white/5">
+    <section id="trust" className="section-tight bg-slate-50 dark:bg-slate-950 transition-colors border-b border-slate-100 dark:border-white/5">
       <div className="container mx-auto px-6 max-w-7xl">
         
-        {/* Header Section - Tightened spacing */}
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white dark:bg-slate-900 border-t border-l border-slate-100 dark:border-white/10 shadow-[0_2px_0_0_#e2e8f0] dark:shadow-[0_2px_0_0_#000] mb-2">
-            <Shield className="w-4 h-4 text-sky-500" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-sky-600 dark:text-sky-400 font-bold uppercase">Security & Workflow</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-slate-900 dark:text-white leading-[0.9] tracking-tighter">
-            Your Investment is Protected. <br/>
-            <span className="text-slate-400 dark:text-slate-500 font-medium italic text-2xl md:text-4xl">Every single line of code.</span>
-          </h2>
-        </div>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-start">
+          
+          {/* LEFT: WORKFLOW & STATUS (Static) */}
+          <div className="space-y-8">
+            <div className="space-y-4 border-l-4 border-[#c2410c] pl-6">
+              <h3 className="font-mono text-[10px] tracking-[0.3em] text-[#c2410c] font-black uppercase">— Reliability</h3>
+              <h2 className="text-4xl md:text-5xl font-display font-black text-slate-900 dark:text-white leading-[0.95] tracking-tighter">
+                Trusted by <br/>
+                <span className="text-[#c2410c]">Global Partners.</span>
+              </h2>
+            </div>
 
-        {/* Credentials Marquee - Tightened padding */}
-        <div className="w-full bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-white/5 py-8 mb-16 overflow-hidden flex items-center shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)]">
-          <div className="flex whitespace-nowrap font-mono text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em] animate-marquee">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="flex items-center space-x-16 px-10">
-                {credentials.map((cred, j) => (
-                  <span key={j} className="flex items-center gap-4 transition-colors hover:text-sky-500">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500" /> {cred}
-                  </span>
+            {/* 3D Health Dashboard */}
+            <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden border-t border-l border-white/10 shadow-2xl">
+              <div className="relative z-10 space-y-4">
+                <h4 className="text-[10px] font-mono font-black mb-6 flex items-center gap-3 uppercase tracking-widest text-slate-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Network Uptime: 100%
+                </h4>
+                {['Neroload Engine', 'SecureVault Pro'].map((app, i) => (
+                  <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 group hover:bg-white/10 transition-all">
+                    <span className="font-bold text-slate-300 font-mono text-[10px] uppercase">{app}</span>
+                    <Zap className="w-3 h-3 text-emerald-400" />
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Wider Grid: Adjusted for tighter vertical rhythm */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 items-start">
-          
-          {/* Timeline: 3D Milestone Flow */}
-          <div className="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border-t border-l border-white dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-            <h4 className="text-2xl font-display font-black text-slate-900 dark:text-white flex items-center gap-4 mb-12 uppercase tracking-tighter">
-              <LockKeyhole className="w-6 h-6 text-sky-500" /> Milestone Escrow Flow
-            </h4>
-            
-            <div className="relative border-l-2 border-slate-100 dark:border-white/5 ml-4 space-y-12">
-              {milestones.map((m, i) => (
-                <div key={i} className="relative pl-12 group">
-                  <div className="absolute -left-[21px] top-0 w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 border-t border-l border-slate-100 dark:border-white/10 flex items-center justify-center font-mono text-xs font-black text-slate-400 shadow-[0_4px_0_0_#e2e8f0] dark:shadow-[0_4px_0_0_#000] transition-all group-hover:translate-y-[-2px] group-hover:text-sky-500">
-                    {m.step}
-                  </div>
-                  <h5 className="text-xl font-black font-display text-slate-900 dark:text-white uppercase tracking-tight">{m.title}</h5>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2 leading-relaxed max-w-md">{m.desc}</p>
-                </div>
-              ))}
             </div>
           </div>
 
-          {/* Right Column: Dashboards */}
-          <div className="space-y-8">
-            {/* Live Product Health Dashboard */}
-            <div className="bg-slate-900 dark:bg-slate-950 rounded-[2.5rem] p-10 text-white relative overflow-hidden border-t border-l border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4)]">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                  <ShieldCheck className="w-40 h-40 text-sky-500" />
-                </div>
-                <div className="relative z-10">
-                  <h4 className="text-[10px] font-mono font-black mb-8 flex items-center gap-3 uppercase tracking-[0.2em] text-slate-400">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_#10b981]"></span>
-                    Live Network Availability
-                  </h4>
-                  <div className="space-y-4">
-                    {['Neroload Validation Engine', 'SecureVault Pro Gateway', 'Icon Wrist Hub Storefront'].map((app, i) => (
-                      <div key={i} className="flex items-center justify-between p-5 bg-white/5 rounded-[1.5rem] border border-white/5 hover:bg-white/10 transition-all hover:translate-x-2 group">
-                        <span className="font-bold text-slate-300 font-mono text-[10px] uppercase tracking-widest group-hover:text-white transition-colors">{app}</span>
-                        <div className="flex items-center gap-3 text-emerald-400 font-mono text-[10px] font-black bg-emerald-500/10 px-3 py-1.5 rounded-full">
-                          <Zap className="w-3.5 h-3.5 fill-current" /> 100% UP
-                        </div>
-                      </div>
-                    ))}
+          {/* RIGHT: 3D CAROUSEL MODULE */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="bg-white dark:bg-slate-900 rounded-[3rem] p-10 border-t border-l border-slate-100 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] relative"
+              >
+                {/* Header: User Info */}
+                <div className="flex items-start gap-5 mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-slate-800 border-t border-l border-white dark:border-white/10 shadow-[0_4px_0_0_#cbd5e1] dark:shadow-[0_4px_0_0_#000] flex items-center justify-center font-black text-slate-300 text-xl">
+                    {testimonials[currentIndex].initials}
+                  </div>
+                  <div className="pt-1">
+                    <h5 className="font-display font-black text-slate-900 dark:text-white text-xl uppercase tracking-tighter">{testimonials[currentIndex].name}</h5>
+                    <p className="text-[#c2410c] text-[10px] font-black uppercase tracking-widest">{testimonials[currentIndex].role}</p>
+                    <div className="flex text-amber-400 mt-2">
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
+                    </div>
                   </div>
                 </div>
-            </div>
 
-            {/* Premium Testimonial Card */}
-            <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] p-10 border-t border-l border-white dark:border-white/10 shadow-2xl relative group">
-               <div className="flex items-start gap-5 mb-8">
-                 <div className="w-16 h-16 rounded-[1.5rem] overflow-hidden shrink-0 border-t border-l border-slate-100 dark:border-white/10 bg-slate-50 dark:bg-slate-800 shadow-[0_4px_0_0_#e2e8f0] dark:shadow-[0_4px_0_0_#000] flex items-center justify-center font-black text-slate-300 dark:text-slate-600 text-xl">
-                   MR
-                 </div>
-                 <div className="pt-1">
-                   <h5 className="font-display font-black text-slate-900 dark:text-white text-xl uppercase tracking-tighter">Michael R.</h5>
-                   <p className="text-sky-600 dark:text-sky-400 text-[10px] font-black uppercase tracking-[0.2em]">CEO, Fintech Partner (USA)</p>
-                   <div className="flex text-amber-400 mt-2 gap-0.5">
-                     {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
-                   </div>
-                 </div>
-               </div>
-               <p className="font-medium text-slate-600 dark:text-slate-400 italic leading-relaxed text-lg border-l-4 border-slate-100 dark:border-white/5 pl-6 py-2">
-                 "Samuel operates with the precision of a large agency. The milestone-based 
-                 delivery combined with daily updates made our complex integration feel effortless."
-               </p>
-               <div className="mt-10 pt-8 border-t border-slate-50 dark:border-white/5 flex justify-between items-center">
-                 <span className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-[0.25em] flex items-center gap-2">
-                   <Globe className="w-4 h-4 text-emerald-500"/> Verified Engagement
-                 </span>
-                 <div className="bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-xl">
-                   <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-                     Top Rated
-                   </span>
-                 </div>
-               </div>
+                {/* Body: Recessed Quote Area */}
+                <div className="relative bg-slate-50 dark:bg-slate-950/50 p-8 rounded-2xl border-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] border border-slate-100 dark:border-white/5">
+                  <Quote className="absolute -top-3 -left-2 w-8 h-8 text-[#c2410c] opacity-20" />
+                  <p className="font-medium text-slate-600 dark:text-slate-400 italic leading-relaxed text-lg">
+                    "{testimonials[currentIndex].text}"
+                  </p>
+                </div>
+
+                {/* Footer: Verified Badges */}
+                <div className="mt-10 pt-8 border-t border-slate-50 dark:border-white/5 flex justify-between items-center">
+                  <span className="text-[10px] font-mono font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-emerald-500"/> Verified Engagement
+                  </span>
+                  <div className="bg-emerald-50 dark:bg-emerald-500/10 px-4 py-2 rounded-lg border border-emerald-100 dark:border-emerald-500/20">
+                    <span className="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase">Top Rated</span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Carousel Controls: 3D Buttons */}
+            <div className="flex gap-3 mt-8 justify-end">
+              <button 
+                onClick={prev}
+                className="w-12 h-12 rounded-xl bg-white dark:bg-slate-900 border-t border-l border-white dark:border-white/10 shadow-[0_4px_0_0_#cbd5e1] dark:shadow-[0_4px_0_0_#000] flex items-center justify-center text-slate-900 dark:text-white active:translate-y-[4px] active:shadow-none transition-all"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={next}
+                className="w-12 h-12 rounded-xl bg-[#c2410c] shadow-[0_4px_0_0_#9a3412] flex items-center justify-center text-white active:translate-y-[4px] active:shadow-none transition-all"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
+
         </div>
       </div>
     </section>

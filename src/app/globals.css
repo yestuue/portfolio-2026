@@ -6,30 +6,38 @@
 
 @layer base {
   :root {
-    /* Standardized Minimal Spacing System */
-    --section-padding: 4.5rem;   /* Reduced from bulky 8-10rem */
-    --nav-height: 70px;
+    /* --- THE "ARCHITECT" BRAND PALETTE --- */
+    --navy-base: #0f172a;        /* Professional Deep Navy */
+    --brick-main: #c2410c;       /* Authentic Brick Brown (Terra Cotta) */
+    --brick-depth: #9a3412;      /* Darker Brick for 3D edges */
+    --slate-ultra-light: #f8fafc;
     
-    /* LIGHT MODE: Tactile & Clean */
-    --color-primary: #0ea5e9;
-    --color-bg-light: #f8fafc;
-    --color-text-main: #0f172a;
+    /* Standardized Spacing */
+    --section-padding: 4.5rem;   
+    --nav-height: 64px;
+    
+    /* LIGHT MODE MAPPING */
+    --color-bg-light: var(--slate-ultra-light);
+    --color-text-main: var(--navy-base);
     --border-color: #e2e8f0;
     
-    /* 3D Depth Shadows */
-    --shadow-3d: 0 6px 0 0 #e2e8f0;
-    --shadow-3d-hover: 0 4px 0 0 #e2e8f0;
+    /* 3D Depth Shadows - Using Navy for depth in Light Mode */
+    --shadow-3d: 0 6px 0 0 #cbd5e1;
+    --shadow-3d-hover: 0 4px 0 0 #cbd5e1;
+    --shadow-brick: 0 6px 0 0 var(--brick-depth);
     --glass-bg: rgba(248, 250, 252, 0.85);
   }
 
   .dark {
-    /* DARK MODE: Hard-Engineered & Deep */
-    --color-bg-light: #020617;
+    /* DARK MODE MAPPING */
+    --color-bg-light: #020617;   /* Deepest Navy/Black */
     --color-text-main: #f8fafc;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.05);
     
+    /* 3D Shadows - Harder Black depth for Dark Mode */
     --shadow-3d: 0 6px 0 0 #000000;
     --shadow-3d-hover: 0 4px 0 0 #000000;
+    --shadow-brick: 0 6px 0 0 #000000;
     --glass-bg: rgba(2, 6, 23, 0.85);
   }
 
@@ -49,7 +57,6 @@
 }
 
 @layer utilities {
-  /* Use this class on all <section> tags to keep margins perfect */
   .section-tight {
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
@@ -59,11 +66,19 @@
     @apply border-t border-l border-white/20 dark:border-white/5;
   }
 
+  /* Brick-Colored 3D Button Utility */
+  .btn-brick {
+    background-color: var(--brick-main);
+    box-shadow: var(--shadow-brick);
+    color: white;
+    @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
+  }
+
   .btn-3d {
     box-shadow: var(--shadow-3d);
     @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
   }
-  /* Fixed the hover syntax error here */
+  
   .btn-3d:hover {
     box-shadow: var(--shadow-3d-hover);
   }
@@ -75,12 +90,9 @@
 
 /* --- ANIMATIONS --- */
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
-
 .animate-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; will-change: transform; }
-.animate-float { animation: float 6s ease-in-out infinite; }
 
-/* Premium Glass Navigation */
+/* Premium Elements */
 .glass-nav {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -88,8 +100,8 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-/* Minimalist Scrollbar */
+/* Minimalist Navy/Brick Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg-light); }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-.dark ::-webkit-scrollbar-thumb { background: #1e293b; }
+.dark ::-webkit-scrollbar-thumb { background: var(--brick-main); }
