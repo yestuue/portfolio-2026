@@ -25,8 +25,9 @@ export default function Hero() {
   }, [taglines.length]);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-50 dark:bg-slate-950 pt-32 pb-12">
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-50 dark:bg-slate-950 pt-20 pb-12">
+      {/* ADDED MT-10: This creates the gap needed so the Navbar (at top-10) doesn't cover your name */}
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 mt-10 md:mt-16">
         
         {/* LEFT COLUMN: BRAND & AUTHORITY */}
         <div className="flex flex-col items-start space-y-6">
@@ -56,7 +57,7 @@ export default function Hero() {
               <span className="relative inline-block text-[#c2410c] mt-2">
                 Opeyemi
                 <svg 
-                  className="absolute w-full h-[15px] -bottom-3 left-0 text-[#c2410c]/20" 
+                  className="absolute w-full h-[15px] -bottom-3 left-0 text-[#c2410c]/40" 
                   viewBox="0 0 300 15" 
                   fill="none" 
                   preserveAspectRatio="none"
@@ -67,7 +68,7 @@ export default function Hero() {
             </h1>
             
             <p className="text-xl md:text-2xl font-bold text-slate-500 dark:text-slate-400 max-w-lg leading-tight tracking-tight">
-              Full-Stack Developer specializing in <span className="text-slate-900 dark:text-white underline decoration-[#c2410c]">Web3 Infrastructure</span> & <span className="text-slate-900 dark:text-white underline decoration-[#c2410c]">AI Solutions</span>.
+              Full-Stack Developer specializing in <span className="text-slate-900 dark:text-white underline decoration-[#c2410c] decoration-2">Web3 Infrastructure</span> & <span className="text-slate-900 dark:text-white underline decoration-[#c2410c] decoration-2">AI Solutions</span>.
             </p>
 
             <div className="h-8 flex items-center">
@@ -78,7 +79,6 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-wrap items-center gap-5 pt-4">
-            {/* TACTILE BRICK BUTTON */}
             <Link 
               href="#projects" 
               className="btn-brick group relative flex items-center gap-2 px-10 py-5 rounded-2xl font-black text-[11px] uppercase tracking-widest"
@@ -98,7 +98,6 @@ export default function Hero() {
 
         {/* RIGHT COLUMN: VISUAL IDENTITY */}
         <div className="relative flex justify-center lg:justify-end min-h-[500px]">
-          {/* Animated Circle: Using Brick */}
           <div className="absolute -top-10 right-0 w-32 h-32 md:w-44 md:h-44 animate-spin-slow z-30">
             <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-20 dark:opacity-40">
               <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
@@ -133,7 +132,7 @@ export default function Hero() {
                 <Github className="w-6 h-6 text-white opacity-30 hover:opacity-100 transition-opacity" />
                 <span className="text-white font-black text-xl opacity-30 italic tracking-tighter">PUMA</span>
                 <Chrome className="w-6 h-6 text-white opacity-30 hover:opacity-100 transition-opacity" />
-                <span className="text-white font-black text-xl opacity-30 italic tracking-tighter underline decoration-[#c2410c]">adidas</span>
+                <span className="text-[#c2410c] font-black text-xl opacity-30 italic tracking-tighter underline decoration-[#c2410c]">adidas</span>
               </div>
             ))}
           </div>

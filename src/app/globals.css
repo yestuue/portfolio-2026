@@ -43,7 +43,6 @@
   * {
     box-sizing: border-box;
     border-color: var(--border-color); 
-    /* Force focus and selection to Brick */
     outline-color: var(--brick-main);
   }
 
@@ -59,6 +58,7 @@
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s ease;
     -webkit-font-smoothing: antialiased;
+    /* This padding ensures content starts below the fixed status bar */
     padding-top: var(--status-bar-height); 
   }
 }
@@ -86,32 +86,38 @@
     @apply transition-all duration-75 active:translate-y-[6px] active:shadow-none hover:translate-y-[2px];
   }
   
-  /* --- THE COLOR PURGE --- 
-     These force-override lingering Tailwind blue/green classes 
-  */
+  /* Hard Overrides for Legacy Blue/Green Classes */
   .text-sky-500, .text-sky-600, .text-blue-600, .text-emerald-500 {
     color: var(--brick-main) !important;
   }
+
   .bg-sky-500, .bg-sky-600, .bg-blue-600, .bg-emerald-500, .bg-sky-50, .bg-blue-50 {
     background-color: var(--brick-main) !important;
   }
-  .decoration-sky-500, .decoration-sky-600, .decoration-[#c2410c]/30 {
-    text-decoration-color: var(--brick-main) !important;
-  }
+
   .border-sky-500, .border-sky-600, .border-emerald-500 {
     border-color: var(--brick-main) !important;
   }
 }
 
-/* Typography */
+/* Typography Classes */
 .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
 .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-/* --- ANIMATIONS --- */
-@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.animate-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; will-change: transform; }
+/* Animations */
+@keyframes marquee { 
+  0% { transform: translateX(0); } 
+  100% { transform: translateX(-50%); } 
+}
 
-/* Premium Elements */
+.animate-marquee { 
+  display: flex; 
+  width: max-content; 
+  animation: marquee 40s linear infinite; 
+  will-change: transform; 
+}
+
+/* Navigation Backdrop */
 .glass-nav {
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
@@ -119,7 +125,7 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-/* Minimalist Navy/Brick Scrollbar */
+/* Scrollbar Branding */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg-light); }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
